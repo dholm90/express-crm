@@ -1,0 +1,35 @@
+
+<div class="container mb-5">
+  <% if(locals.errors) {%> 
+    <div class="alert alert-danger">
+      <ul>
+        <% errors.forEach(err => { %>
+          <li><%- err.msg %> </li>
+        <% }) %> 
+      </ul>
+    </div>
+  <%}%>
+  <h1 class=""><u>User</u></h1>
+  <hr>
+  <div class="card bg-light shadow">
+    <div class="card-body">
+      <p><b>Name: </b><%- user.name %> </p>
+      <p><b>Email: </b><%- user.email %> </p>
+      <p><b>Business Name: </b><%- user.businessName %> </p>
+      <p><b>Phone #: </b><%= phoneHelper.formatPhoneNumber(user.phone) %> </p>
+      <p><b>Street: </b><%- user.street %></p> 
+      <p><b>City: </b><%- user.city %> </p>
+      <p><b>Province / State: </b><%- user.province %></p>
+      <p><b>Postal / Zip Code: </b><%- user.postal %></p>
+      <p><b>HST / VAT:</b><%- user.hst %> </p>
+      <div class="d-flex gap-3">
+        <form action="<%- user.url %>/update" method="get">
+          <button class="btn btn-primary">Update</button>
+        </form>
+        <!-- <form action="<%- user.url %>/delete" method="get">
+          <button class="btn btn-danger">Delete</button>
+        </form> -->
+      </div>
+    </div>
+  </div>
+</div>

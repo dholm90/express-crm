@@ -1,0 +1,35 @@
+<!-- <div class="container d-grid mb-5"> -->
+  <div class="d-flex gap-3 align-items-center">
+    <h1 class=""><u><%- title %></u></h1>
+    <form class="" action="/employee/create-material" method="get">
+      <button class=" btn btn-primary">New Material</button>
+    </form>
+  </div>
+  <hr>
+  <!-- <div class="table-responsive text-nowrap"> -->
+  <table class="table table-striped text-nowrap display" style="width:100%">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <!-- <th>In Stock</th> -->
+        <th>Supplier</th>
+      </tr>
+    </thead>
+    <tbody class="align-middle">
+      <% material_list.forEach(material => { %>
+        <tr>
+          <td>
+            <a class="" href="<%- material.url_employee %>"><%- material.name %></a>
+          </td>
+          <td>$<%- material.price %></td>
+          <!-- <td><%#- material.inStock %> </td> -->
+          <td><%- material.supplier %> </td>
+        </tr>
+      <% }) %> 
+    </tbody>
+  </table>  
+  <!-- </div>   -->
+<!-- </div> -->
+
+

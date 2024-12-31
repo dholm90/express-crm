@@ -1,0 +1,305 @@
+<% if(locals.errors) {%> 
+  <div class="alert alert-danger">
+    <ul>
+      <% errors.forEach(err => { %>
+        <li><%- err.msg %> </li>
+      <% }) %> 
+    </ul>
+  </div>
+<%}%>
+<div id ="hero-content" class="text-light ">
+
+  <!-- Hero Section -->
+  <div id="home" class="mw align-items-center col-xl-12 pb-0 px-4" >
+    <div id="hero-image"></div>
+    <div id="" class="row align-items-center g-lg-6 ">
+      <div id="hero-header" class=" col-12 col-lg-6 text-light text-center text-lg-start d-flex flex-column justify-content-center">
+        <h1 class="display-4 fw-bold lh-1 mb-3">Say Goodbye to Clunky Contracting Software and Hello to Efficiency with Bear Quotes</h1>
+        <p class="fs-4">Running a contracting business can be <span class="text-warning">stressful</span> and <span class="text-warning">time-consuming</span>. </p>
+        <p class="fs-4">That's why we created Bear Quotes - to <span class="text-warning">simplify</span> the process for you. </p>
+        <p class="fs-4">Our software is designed to save you time, <span class="text-warning">increase efficiency</span>, and make running your business a breeze. </p>
+        <p class="fs-4">Sign up today and <span class="text-warning">experience the difference</span> Bear Quotes can make for your contracting business.</p>
+      
+
+        <!-- <form class="rounded-3 text-dark mb-3" action='/opt-in' method="POST">
+          
+          <div class="form-floating mb-3">
+            <input class="form-control" type="email" name="email" id="email" required="true" placeholder="example@google.com">
+            <label class="" for="email">Email:</label>
+          </div>
+          
+          
+          <button class="w-100 btn btn-lg btn-warning" type="submit">Sign Up!</button>
+        </form> -->
+        <a href="/sign-up-discount" class="btn btn-lg w-100 btn-primary mb-2 cta-btn">Get 50% Off for 3 Months</a>
+        
+      </div>
+      <div class="col-12 col-lg-6 text-light text-center text-lg-start   d-flex flex-column justify-content-center">
+        <img src="/public/images/mockups.webp" class="img-fluid" alt="Bear Quotes Contractor Invoicing Software">
+      
+      </div>
+        
+    
+    </div>
+  </div>
+  <div class="container">
+  <!-- Features Section -->
+  <div id="features" class="section-container marketing text-white mb-0 pb-0" >
+    <div class="">
+      <div class="fade-left pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal">Features</h1>
+        <p class="fs-5 text-light"></p>
+      </div>
+  
+      <!-- Three columns of text below the carousel -->
+      <!-- <div class="row">
+        <div class="col-lg-4 mb-md-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" fill="#ffc107" class="mb-3 bi-lightning-fill mb-3" viewBox="0 0 16 16">
+            <path d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873-.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641l2.5-8.5z"/>
+          </svg>
+          <h2 class="fw-normal">Fast</h2>
+          <p class="mb-md-0">Getting a perfect google lighthouse score is nothing to shrug at. This means your website will load faster than your competitors.</p>
+        </div>
+        <div class="col-lg-4 mb-md-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" fill="#ffc107" class="mb-3 bi-phone" viewBox="0 0 16 16">
+            <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+            <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+          </svg>
+
+          <h2 class="fw-normal">Responsive</h2>
+          <p class="mb-md-0">Be confident that your website looks exceptional on all devices and browsers. Your customers will thank you!</p>
+        </div>
+        <div class="col-lg-4 mb-md-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" fill="#ffc107" class="mb-3 bi-person-up" viewBox="0 0 16 16">
+            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 0 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.708l1.5-1.5a.5.5 0 0 1 .708 0ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+            <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
+          </svg>
+
+          <h2 class="fw-normal">Reliable</h2>
+          <p class="mb-md-0">Your website is a salesman that works around the clock. No exceptions. With a 99.99% uptime you can rest easy while your website lands new clients.</p>
+        </div>
+      </div>
+    </div>
+     -->
+
+
+    <!-- START THE FEATURETTES -->
+
+    <!-- <hr class="featurette-divider bg-warning "> -->
+
+    <div class="row featurette fade-left">
+      <div class="col-md-5">
+        <h2 class="featurette-heading fw-normal lh-1">Manage your clients with ease. <span class="text-warning">Take back your time.</span></h2>
+        <p class="lead">Keep track of all your clients in one place, easily manage client information, and monitor client activity conveniently.</p>
+      </div>
+      <div class="col-md-7">
+
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+        <img class="featurette-img img-fluid mx-auto" loading="lazy" src="/public/images/client-list.png" alt="Clients"  preserveAspectRatio="xMidYMid slice" focusable="false">
+
+      </div>
+    </div>
+
+    <hr class="featurette-divider bg-warning fade-left">
+
+    <div class="row featurette fade-left">
+      <div class="col-md-5 order-md-2">
+        <h2 class="featurette-heading fw-normal lh-1">Handle credit card payments. <span class="text-warning">Get paid faster.</span></h2>
+        <p class="lead">Accept credit card payments directly through the platform, making it easier and more convenient for your clients to pay.</p>
+      </div>
+      <div class="col-md-7 order-md-1">
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+        <img class="featurette-img img-fluid mx-auto" loading="lazy" src="/public/images/stripe.png" alt="Stripe"  preserveAspectRatio="xMidYMid slice" focusable="false">
+      </div>
+    </div>
+
+    <hr class="featurette-divider bg-warning fade-left">
+
+    <div class="row featurette fade-left">
+      <div class="col-md-7">
+        <h2 class="featurette-heading fw-normal lh-1">Create invoices on the fly. <span class="text-warning">Admin work made simple.</span></h2>
+        <p class="lead">Generate invoices from your dashboard. Email them, download them, organize them, save so much time.</p>
+      </div>
+      <div class="col-md-5">
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+        <img class="featurette-img img-fluid mx-auto" loading="lazy" src="/public/images/invoice.png" alt="Invoice" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+      </div>
+    </div>
+    <hr class="featurette-divider bg-warning fade-left mb-5">
+    <div class="row pricing-header mx-auto">
+      <div class="d-grid gap-3">
+        <p class="fs-4 text-center fade-left">Bear Quotes is the ultimate contracting software that helps you streamline your business operations and boost productivity. Here are some of the key features:
+        </p>
+        <hr class="fade-left">
+        <ul class="fs-5 d-grid gap-3 list-unstyled">
+          <li class="fade-left"><span class="text-warning fw-bold">Client Management: </span>Keep track of all your clients in one place, oversee client information, and monitor client activity efficiently.</li>
+          <li class="fade-left"><span class="text-warning fw-bold">Employee Management: </span>Direct your employees effectively with features like employee information storage, job scheduling, and stat tracking.</li>
+          <li class="fade-left"><span class="text-warning fw-bold">Transactional Emails: </span>Send professional and personalized transactional emails complete with pdf attachments.</li>
+          <li class="fade-left"><span class="text-warning fw-bold">Credit Card Payments: </span>Accept credit card payments directly through the platform, making it easier and more convenient for your clients to pay.</li>
+          <li class="fade-left"><span class="text-warning fw-bold">Image Organization: </span>Keep all your images organized and accessible in one place, as well as viewable in quote, job, and invoice documents. It's simple to access and control your assets.</li>
+        </ul>
+        <hr class="fade-left">
+        <div class="">
+          <p class="fs-4 text-center fade-left">Bear Quotes is designed to help contractors manage their businesses more efficiently, effectively, and with ease. Get a personalized demo today to see how Bear Quotes can benefit your business!</p>
+        <a href="https://calendly.com/bearquotes/30-minute-consultation" target="_blank" class="w-100 btn btn-lg btn-warning rounded-pill fade-left">Book A Consultation</a>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- <hr class="featurette-divider bg-warning"> -->
+
+    <!-- /END THE FEATURETTES -->
+    </div>
+  </div>
+  <!-- About Section -->
+  <!-- <div id="about" class="section-container ">
+    <div class="pricing-header mx-auto">
+      <h1 class="display-4 fw-normal text-center fade-left">About</h1>
+      <div class="d-grid gap-3">
+        <p class="fs-4 fade-left">At Bear Quotes, we are dedicated to providing contractors with the tools they need to streamline their business operations and increase their productivity. Our software is designed to help contractors manage clients, employees, materials, and services, all in one convenient location. With features like transactional emails, credit card payments, and image organization, our software makes it easy for contractors to focus on what they do best - their craft.</p>
+
+        <p class="fs-4 fade-left">Our team is made up of experienced professionals who understand the unique challenges facing contractors in today's market. We're constantly working to improve our software and add new features to meet the evolving needs of our customers. We pride ourselves on providing exceptional customer service and support, and we're always happy to answer any questions or concerns you may have.</p>
+        
+      </div>
+     
+    </div> -->
+
+    <!-- <div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Custom jumbotron</h1>
+        <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+        <button class="btn btn-primary btn-lg" type="button">Example button</button>
+      </div>
+    </div> -->
+
+    
+
+   <!-- Reviews Section -->
+  <!-- 
+  <div id="reviews"><br></div>
+  <div class="bg-secondary bg-gradient b-example-divider"></div>
+
+ 
+
+  <div class="pb-4">
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal">Reviews</h1>
+      <p class="fs-5">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
+    </div>
+    <div id="myCarousel" class="carousel slide m-auto border border-warning border-start-0 border-end-0" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active bg-dark ">
+          <div class="container align-items-center">
+            <div class="carousel-caption text-start">
+              <h1>Example headline.</h1>
+              <p>Some representative placeholder content for the first slide of the carousel.</p>
+              <p><a class="btn btn-lg btn-outline-warning" href="#">Sign up today</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item bg-dark">   
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Another example headline.</h1>
+              <p>Some representative placeholder content for the second slide of the carousel.</p>
+              <p><a class="btn btn-lg btn-outline-warning" href="#">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item bg-dark">   
+          <div class="container">
+            <div class="carousel-caption text-end">
+              <h1>One more for good measure.</h1>
+              <p>Some representative placeholder content for the third slide of this carousel.</p>
+              <p><a class="btn btn-lg btn-outline-warning" href="#">Browse gallery</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div> -->
+
+  <!-- Pricing -->
+  <div id="pricing" class="section-container">
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal fade-left">Pricing</h1>
+      <p class="fs-5 fade-left">Get ahead of the curve. At just $29.99 per month, you can run your contracting company with ease. Propel your business forward and save time with our contracting business invoicing software, the sky's the limit.</p>
+    </div>
+    <div class="row mb-3 text-center fade-left">
+      <div class="col ">
+        <div class="card mx-auto w-75 bg-dark text-light mb-4 rounded  shadow-sm">
+          <div class="card-header bg-light text-dark py-3">
+            <h2 class="h4 my-0 fw-normal">Standard Package</h2>
+          </div>
+          <div class="card-body border border-warning border-top-0 rounded-bottom">
+            <h1 class="card-title pricing-card-title">$29.99<small class="fw-light">/mo</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Unlimited employee accounts</li>
+              <li>Unlimited clients</li>
+              <li>Unlimited transactional emails</li>
+              <li>Unlimited image storage</li>
+              <li>Unlimited quotes, jobs, and invoices</li>
+              <li>Unlimited credit card transactions †</li>
+            </ul>
+            <a href="/sign-up-discount" class="w-100 btn btn-lg btn-warning">50% Off For 3 Months</a>
+            <p class="mt-2 mb-0"><small class="">† 2.9% + $1.00 credit card processing fee per transaction.</small></p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+  <!-- Contact Section -->
+
+  <div id="contact-bottom" class="section-container">
+    <div class="pricing-header p-3 pb-0 mx-auto text-center ">
+      <h1 class="display-4 fw-normal fade-left">Contact</h1>
+      <p class="fs-5 fade-left ">Our contact form is here to help you get in touch with us quickly and easily. If you have any questions, comments, or concerns about our contracting software or pricing packages, please don't hesitate to fill out the form and we'll get back to you as soon as possible.</p> 
+      <p class="fs-5 fade-left">We're always happy to hear from our customers and provide support in any way we can. Additionally, we value your privacy and will never share your personal information with anyone else. Thank you for considering Bear Quotes for your contracting software needs!</p>
+      
+    </div>
+    <div class="mx-auto pb-5">
+      <form class="p-4 p-md-5 pt-2 pt-md-2 rounded-3 text-dark" action='/contact-form' method="POST">
+        <div class="form-floating mb-3 fade-left">
+          <input class="form-control" type="text" name="name" id="name-contact" required="true" placeholder="Name">
+          <label class="" for="name-contact">Name:</label>
+        </div>
+        <div class="form-floating mb-3 fade-left">
+          <input class="form-control" type="email" name="email" id="email-contact" required="true" placeholder="example@google.com">
+          <label class="" for="email-contact">Email:</label>
+        </div>
+        <div class="form-floating mb-3 fade-left">
+          <input class="form-control" type="tel" name="phone" id="phone-contact" required="true" placeholder="5195555555">
+          <label class="" for="phone-contact">Phone</label>
+        </div>
+        <div class="form-floating mb-3 fade-left">
+          <textarea class="form-control" name="message" id="message-contact" cols="30" rows="10" required="true" placeholder="Hello!"></textarea></textarea>
+          <label class="" for="message-contact">Message:</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-warning fade-left" type="submit">How can we help you?</button>
+        
+      </form>
+    </div>
+  </div>
+
+</div>  <!-- <div class="b-example-divider"></div> -->
+</div>
+
+

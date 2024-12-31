@@ -1,0 +1,33 @@
+<!-- <div class="container d-grid mb-5"> -->
+  <div class="d-flex gap-3 align-items-center">
+    <h1 class=""><u><%- title %></u></h1>
+    <form class="" action="/employee/create-service" method="get">
+      <button class="btn btn-primary">New Service</button>
+    </form>
+  </div>
+  <hr>
+  <!-- <div class="table-responsive text-nowrap"> -->
+  <table class="table table-striped text-nowrap display" style="width:100%">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody class="align-middle">
+      <% service_list.forEach(service => { %>
+        <tr>
+          <td>
+            <a class="" href="<%- service.url_employee %>"><%- service.title %></a>
+          </td>
+          <td><%- service.description %></td>
+          <td>$<%- service.price.toFixed(2) %> </td>
+        </tr>
+      <% }) %> 
+    </tbody>
+  </table>    
+  <!-- </div> -->
+<!-- </div> -->
+
+

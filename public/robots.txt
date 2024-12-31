@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /employee/
+Disallow: /stripe/
+Sitemap: https://www.bearquotes.com/sitemap.txt
+

@@ -1,0 +1,84 @@
+<!-- <div class="container d-grid mb-5"> -->
+  <div class="d-flex gap-3 align-items-center">
+    <h1 class=""><u><%- title %></u></h1>
+    <!-- <form class="" action="/dashboard/create-client" method="get">
+      <button class=" btn btn-primary">New Client</button>
+    </form> -->
+  </div>
+  <hr>
+  <!-- <div class="table-responsive text-nowrap"> -->
+    <div class="card shadow bg-light mb-4">
+      <div class="card-header"><h2>Unpaid</h2></div>
+      <div class="card-body">
+        <table class="table table-striped text-nowrap display-hours-export" style="width:100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Date</th>
+              
+              
+              <th>Mark Paid</th>
+              
+            </tr>
+          </thead>
+          <tbody class="align-middle">
+            <% expenses.forEach(log => { %>
+              <% if(!log.isPaid) {%>
+              <tr>
+                <td><%- log.createdBy.name %></td>
+                <td>$<%- log.price.toFixed(2) %></td>
+                <td><%- log.createdAt %></td>
+                
+                <td>
+                  <form action="/dashboard/expense/<%- log._id %>/toggle-paid" method="post">
+                    <button type="submit" class="btn btn-primary">Paid</button>
+                  </form>
+                </td>
+              </tr>
+            <% } %>
+            <% }) %> 
+          </tbody>
+        </table>    
+      </div>
+    </div>
+
+    <div class="card shadow bg-light mb-4">
+      <div class="card-header"><h2>Paid</h2></div>
+      <div class="card-body">
+        <table class="table table-striped text-nowrap display-hours-export" style="width:100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Date</th>
+              
+              
+              <th>Mark Unpaid</th>
+              
+            </tr>
+          </thead>
+          <tbody class="align-middle">
+            <% expenses.forEach(log => { %>
+              <% if(log.isPaid) {%>
+              <tr>
+                <td><%- log.createdBy.name %></td>
+                <td>$<%- log.price.toFixed(2) %></td>
+                <td><%- log.createdAt %></td>
+                
+                <td>
+                  <form action="/dashboard/expense/<%- log._id %>/toggle-paid" method="post">
+                    <button type="submit" class="btn btn-primary">Unpaid</button>
+                  </form>
+                </td>
+              </tr>
+            <% } %>
+            <% }) %> 
+          </tbody>
+        </table>    
+      </div>
+    </div>
+  <!-- </div> -->
+<!-- </div> -->
+
+

@@ -1,0 +1,26 @@
+<div class="loginContainer container">
+  <div id ="hero-content" class="">
+  <!-- <div id="home" class="mw align-items-center col-xl-12 pb-0 px-4" > -->
+    <div id="hero-image"></div>
+    <h1 class="text-center text-light">Blog</h1>
+    <hr>
+    <% post_list.forEach(post => {%> 
+    <div class="card bg-dark text-light mb-4 shadow border-1 border-warning">
+      <div class="card-header">
+        <h3><%- post.title %></h3>
+      </div>
+      <div class="card-body row">
+        <img class="col-12 col-md-4" src="/public/images/uploads/1677501014440facebook.png" class="img-fluid" alt="">
+        <div class="col">
+          <div class="line-clamp mb-2"><%- post.content %></div>
+        <a class="stretched-link btn btn-warning" href="<%- post.client_url %> ">Read More</a>
+        </div>
+        
+      </div>
+      
+    </div>
+    <% }) %> 
+  </div>
+  <!-- </div> -->
+  
+</div>

@@ -1,0 +1,25 @@
+
+<section class="card mb-3">
+  <div class="card-header bg-dark .bg-gradient text-light">
+    <h5 class="align-middle">Message</h5>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card-body">
+        <p><b>From: </b><%- form.name %></p>
+        <p><b>Email: </b><a href="mailto:<%- form.email %>"><%- form.email %></a></p>
+        <p><b>Phone Number: </b><a href="tel:+<%- form.phone %> "><%- form.phone %></a></p>
+        <p><b>Recieved: </b><%- form.date_formatted %> </p>
+        <p><b>Message: </b></p>
+        <div class="card card-body"><%- form.message %> </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-body d-grid gap-3">
+        <form class="d-grid" action="<%- form.url %>/delete" method="post">
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </div> 
+    </div>
+  </div>
+</section>

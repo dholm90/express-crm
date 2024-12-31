@@ -1,0 +1,72 @@
+<% if(locals.errors) {%> 
+  <div class="alert alert-danger">
+    <ul>
+      <% errors.forEach(err => { %>
+        <li><%- err.msg %> </li>
+      <% }) %> 
+    </ul>
+  </div>
+<%}%>
+<h1 class=""><u><%- title %></u></h1>
+<hr>
+<div class="card bg-light shadow">
+  <div class="card-body">
+    <form class="" action="<%- lead.url %>/update" method="POST">
+      <div class="form-floating mb-3">
+        <input class="form-control" id="firstName" name="firstName" type="text" required="true" placeholder="First" value='<%= lead ? lead.firstName : '' %>'  />
+        <label for="firstName">First Name:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" id="lastName" name="lastName" type="text" required="true" placeholder="Last" value='<%= lead ? lead.lastName : '' %>'  />
+        <label for="lastName">Last Name:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" id="businessName" name="businessName" type="text" placeholder="Business"  value='<%= lead ? lead.businessName : '' %>'/>
+        <label for="businessName">Business Name:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" id="email" name="email" type="email" placeholder="name@email.com" value='<%= lead ? lead.email : '' %>' />
+        <label for="email">Email:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" id="phone" name="phone" type="number" placeholder="First" value='<%= lead ? lead.phone : '' %>'  />
+        <label for="phone">Phone Number:</label>
+      </div>
+
+      <textarea name="tinymce_content" id="tinymce_content"><%= lead ? lead.notes : '' %></textarea>
+      <div class="mb-3"></div>
+      <div class="form-check mb-3">
+        <label for="isContacted">Contacted:</label>
+        <input class="form-check-input" type="checkbox" name="isContacted" id="isContacted" <%= lead.isContacted ? "checked" : "" %>>
+      </div>
+      
+      <button class="btn btn-primary me-4">Submit</button>
+      <button id="deleteToggle" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+
+    </form>
+  </div>
+  
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Blog Post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This will permanantly delete this lead.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form action="/admin/lead/<%- lead._id %>/delete" method="post">
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+

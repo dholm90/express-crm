@@ -1,0 +1,38 @@
+<!-- <div class="container mb-5"> -->
+  <% if(locals.errors) {%> 
+    <div class="alert alert-danger">
+      <ul>
+        <% errors.forEach(err => { %>
+          <li><%- err.msg %> </li>
+        <% }) %> 
+      </ul>
+    </div>
+  <%}%>
+  <h1 class=""><%- title %></h1>
+  <hr>
+  <!-- <div class="card bg-light shadow"> -->
+    <!-- <div class="card-body"> -->
+      <form class="" action="" method="POST">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="title" name="title" type="text" required="true" placeholder="Invoice 1" value="<%= form ? form.title : '' %>" />
+          <label for="title" class="form-label">Title:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <textarea class="form-control" id="description-area" name="description" required="true" placeholder="Description" ><%= form ? form.description : ''%></textarea>
+          <label for="" class="form-label">Description:</label>
+        </div>
+        
+        <div class="form-floating mb-3">
+          <input class="form-control" type="number" name="price" id="price" min="0" step=".01" required="true" placeholder="13" value="<%= form ? form.price : '' %>"/>
+          <label for="price">Price:</label>
+        </div>
+          
+        
+        
+    
+        <button class="btn btn-primary">Create Service</button>
+      </form>
+    <!-- </div>
+  </div> -->
+<!-- </div> -->

@@ -1,0 +1,54 @@
+<div class="container d-grid mb-5">
+  <h1 class="mb-5"><u>Messages</u></h1>
+  <h3 class="">Unread</h3>
+  <hr>
+  <div class="row mb-5">
+    <% form_list.notRead.forEach(form => { %>
+      <div class="col-12 col-md-6 mb-4">
+        <div class="card bg-light shadow">
+          <div class="card-body">
+            <p><b>Name: </b><%- form.name %></p>
+            <p><b>Email: </b><a href="mailto:<%- form.email %> "><%- form.email %></a></p>
+            <p><b>Phone Number: </b><a href="tel:+<%- form.phone %> "><%= phoneHelper.formatPhoneNumber(form.phone) %></a></p>
+            <p><b>Recieved: </b><%- form.date_formatted %> </p>
+            <p><b>Message: </b><br> <%- form.message %> </p>
+            <div class="d-flex gap-3">
+              <form class="" action="<%- form.url %>/mark-read" method="post">
+                <button class="btn btn-primary">Mark Read</button>
+              </form>
+              <form class="" action="<%- form.url %>/delete" method="post">
+                <button class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  <% }) %>
+  </div>
+
+  <h3 class="">Read</h3>
+  <hr>
+  <div class="row">
+    <% form_list.isRead.forEach(form => { %>
+      <div class="col-12 col-md-6 mb-4">
+        <div class="card bg-light shadow">
+          <div class="card-body">
+            <p><b>Name: </b><%- form.name %></p>
+            <p><b>Email: </b><a href="mailto:<%- form.email %> "><%- form.email %></a></p>
+            <p><b>Phone Number: </b><a href="tel:+<%- form.phone %> "><%= phoneHelper.formatPhoneNumber(form.phone) %></a></p>
+            <p><b>Recieved: </b><%- form.date_formatted %> </p>
+            <p><b>Message: </b><br> <%- form.message %> </p>
+            <div class="d-flex gap-3">
+              <form class="" action="<%- form.url %>/delete" method="post">
+                <button class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% }) %>
+  </div>
+</div>
+
+

@@ -1,0 +1,399 @@
+<!-- <div class="container mb-5"> -->
+  <% if(locals.errors) {%> 
+    <div class="alert alert-danger">
+      <ul>
+        <% errors.forEach(err => { %>
+          <li><%- err.msg %> </li>
+        <% }) %> 
+      </ul>
+    </div>
+  <%}%>
+  <h1 class="mb-3"><u><%- user.name %></u></h1>
+
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header h2">Contact Information</div>
+    <div class="card-body">
+      <% if(user.role == "ADMIN") { %> 
+      <form class="mb-4" action="/dashboard/update" method="POST">
+        <% } else { %> 
+      <form class="mb-4" action="<%- user.url_dashboard %>/update-employee" method="POST">
+        <% } %> 
+        <div class="form-floating mb-3">
+          <input class="form-control" id="firstName" name="firstName" type="text" required="true" placeholder="John" value='<%= user ? user.firstName : '' %>' />
+          <label class="form-label">First Name:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="lastName" name="lastName" type="text" required="true" placeholder="Doe" value='<%= user ? user.lastName : '' %>'/>
+          <label for="lastName" class="form-label">Last Name:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="email" name="email" type="email" required="true" placeholder="example@email.com" value='<%= user ? user.email : '' %>' />
+          <label class="form-label" for="email">Email:</label>
+        </div>
+        <div class="form-floating mb-3">
+            
+          <input class="form-control" id="phone" name="phone" type="tel" placeholder="5555555555" value='<%= user ? user.phone : '' %>'/>    
+          <label class="form-label" for="phone">Phone Number:</label>
+        </div>
+        
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="street" name="street" type="text" placeholder="123 Real St" value='<%= user ? user.street : '' %>'/>  
+          <label class="form-label" for="street">Street:</label>
+        </div>
+        <div class="form-floating mb-3">
+
+          <input class="form-control" id="city" name="city" type="text" placeholder="Toronto" value='<%= user ? user.city : '' %>'/>  
+          <label class="form-label" for="city">City:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="province" name="province" type="text" placeholder="Ontario" value='<%= user ? user.province : '' %>'/>  
+          <label class="form-label" for="province">Province / State:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="postal" name="postal" type="text" placeholder="1A1A1A"  value='<%= user ? user.postal : '' %>'/>  
+          <label class="form-label" for="postal">Postal / Zip Code:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="hst" name="hst" type="text" placeholder="1234567 HG" value='<%= user ? user.hst : '' %>'/>  
+          <label class="form-label" for="hst">HST / VAT: <small>(optional)</small></label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="hourlyRate" name="hourlyRate" type="number" placeholder="30" step="0.01" required value='<%= user ? user.hourlyRate : 0 %>'/>  
+          <label class="form-label" for="hourlyRate">Hourly Rate:</label>
+        </div>
+        <% if(user._id.equals(currentUser._id) == false) { %>
+        <div class="form-check mb-3">
+          <label for="role">Administrator</label>
+          <input class="form-check-input" type="checkbox" name="role" id="role" 
+          <% if(user) {%>
+            <%= user.role == 'ADMIN' ? 'checked' : '' %>
+          <% } %>
+          >
+        </div>
+        <% }%>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary">Save</button>
+          
+        </div>
+      </form>
+      
+    </div>
+    </div>
+    <!-- <div class="container"> -->
+      <div class="row row-cols-2 g-4 mb-4">
+        <div class="col-12 col-lg-6">
+          <div class="card bg-light shadow">
+            <div class="card-body d-flex flex-column gap-3">
+              <h2>Close Ratio</h2>
+              <p class="fs-4 mb-0"><%- close_ratio %>%</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="card bg-light shadow">
+            <div class="card-body d-flex flex-column gap-3">
+              <h2>Monthly Revenue</h2>
+              <p class="fs-4 mb-0">$<%- monthly_revenue.toFixed(2) %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="card bg-light shadow">
+            <div class="card-body d-flex flex-column gap-3">
+              <h2>Monthly Profit</h2>
+              <p class="fs-4 mb-0">$<%- monthly_profit %></p>
+            </div>
+          </div>
+        </div>
+        
+    
+        
+    
+        
+      </div>
+    <!-- </div> -->
+    
+    
+    
+      <div class="card bg-light shadow mb-4">
+        <div class="card-header"><h2>Quotes</h2></div>
+        <div class="card-body">
+          <table class="table table-striped text-nowrap display-dates" style="width:100%">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Client</th>
+                <th>Total</th>
+                <th>Created By</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Is Active</th>
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <% quote_list.forEach(quote => { %>
+           
+                <tr>
+                  <td>
+                    <a class="" href="<%- quote.url %>"><%- quote.title %></a>
+                  </td>
+                  <td><%= quote.client ? quote.client.name : 'Deleted' %></td>
+                  <td>$<%- quote.total %></td>
+                  <td><%- quote.createdBy.name %> </td>
+                  <td><%- quote.jobStart_formatted_weekday %> </td>
+                  <td><%- quote.jobEnd_formatted_weekday %> </td>
+                  <td><%- quote.isActive %></td>
+                </tr>
+           
+              <% }) %> 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+      <div class="card bg-light shadow mb-4">
+        <div class="card-header"><h2>Jobs</h2></div>
+        <div class="card-body">
+          <table class="table table-striped text-nowrap display-dates" style="width:100%">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Client</th>
+                <th>Total</th>
+                <th>Created By</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Is Active</th>
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <% job_list.forEach(job => { %>
+             
+                <tr>
+                  <td>
+                    <a class="" href="<%- job.url %>"><%- job.title %></a>
+                  </td>
+                  <td><%= job.client ? job.client.name : 'Deleted' %></td>
+                  <td>$<%- job.total %></td>
+                  <td><%- job.createdBy.name %></td>
+                  <td><%- job.jobStart_formatted_weekday %> </td>
+                  <td><%- job.jobEnd_formatted_weekday %> </td>
+                  <td><%- job.isActive %></td>
+                </tr>
+            
+              <% }) %> 
+            </tbody>
+          </table>  
+        </div>
+      </div>
+    
+      <div class="card bg-light shadow mb-4">
+        <div class="card-header"><h2>Invoices</h2></div>
+        <div class="card-body">
+          <table class="table table-striped text-nowrap display-dates" style="width:100%">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Client</th>
+                <th>Total</th>
+                <th>Created By</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Is Active</th>
+                
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <% invoice_list.forEach(invoice => { %>
+                
+                <tr>
+                  <td>
+                    <a class="" href="<%- invoice.url %>"><%- invoice.title %></a>
+                  </td>
+                  <td><%= invoice.client ? invoice.client.name : 'Deleted' %></td>
+                  <td>$<%- invoice.total.toFixed(2) %></td>
+                  <td><%- invoice.createdBy.name %></td>
+                  <td><%- invoice.jobStart_formatted_weekday %> </td>
+                  <td><%- invoice.jobEnd_formatted_weekday %> </td>
+                  <td><%- invoice.isActive %></td>
+                  
+                </tr>
+              
+              <% }) %> 
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card bg-light shadow mb-4">
+        <div class="card-header"><h2>Hours</h2></div>
+        <div class="card-body">
+          <h3>Unpaid</h3>
+          <hr>
+          <table class="table table-striped text-nowrap display-hours" style="width:100%">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Hours</th>
+                <th>Date</th>
+                <th>Mark Paid</th>
+                
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <% hours_list.forEach(log => { %>
+                <% if(!log.isPaid) {%>
+                <tr>
+                  <td><%- log.employee.name %></td>
+                  <td><%- log.totalHours %></td>
+                  <td><%- log.date %></td>
+                  <td>
+                    <form action="/dashboard/hour-log/<%- log._id %>/toggle-paid" method="post">
+                      <button type="submit" class="btn btn-primary">Paid</button>
+                    </form>
+                  </td>
+                </tr>
+                <% } %>
+              <% }) %> 
+            </tbody>
+          </table>
+          <hr>
+          <h3>Paid</h3>
+          <hr>
+          <table class="table table-striped text-nowrap display-hours" style="width:100%">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Hours</th>
+                <th>Date</th>
+                <th>Mark Unpaid</th>
+                
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <% hours_list.forEach(log => { %>
+                <% if(log.isPaid) {%>
+                <tr>
+                  <td><%- log.employee.name %></td>
+                  <td><%- log.totalHours %></td>
+                  <td><%- log.date %></td>
+                  <td>
+                    <form action="/dashboard/hour-log/<%- log._id %>/toggle-paid" method="post">
+                      <button type="submit" class="btn btn-primary">Unpaid</button>
+                    </form>
+                  </td>
+                </tr>
+                <% } %>
+              <% }) %> 
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card bg-light shadow mb-4">
+        <div class="card-header"><h2>Expenses</h2></div>
+        <div class="card-body">
+          <h3>Unpaid</h3>
+          <hr>
+          <table class="table table-striped text-nowrap display-hours" style="width:100%">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Date</th>
+                
+                
+                <th>Mark Paid</th>
+                
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <% expense_list.forEach(log => { %>
+                <% if(!log.isPaid) {%>
+                <tr>
+                  <td><%- log.createdBy.name %></td>
+                  <td>$<%- log.price.toFixed(2) %></td>
+                  <td><%- log.createdAt %></td>
+                  
+                  <td>
+                    <form action="/dashboard/expense/<%- log._id %>/toggle-paid" method="post">
+                      <button type="submit" class="btn btn-primary">Paid</button>
+                    </form>
+                  </td>
+                </tr>
+              <% } %>
+              <% }) %> 
+            </tbody>
+          </table> 
+          <hr>
+          <h3>Paid</h3>
+          <hr>
+          <table class="table table-striped text-nowrap display-hours" style="width:100%">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Date</th>
+                
+                
+                <th>Mark Unpaid</th>
+                
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <% expense_list.forEach(log => { %>
+                <% if(log.isPaid) {%>
+                <tr>
+                  <td><%- log.createdBy.name %></td>
+                  <td>$<%- log.price.toFixed(2) %></td>
+                  <td><%- log.createdAt %></td>
+                  
+                  <td>
+                    <form action="/dashboard/expense/<%- log._id %>/toggle-paid" method="post">
+                      <button type="submit" class="btn btn-primary">Unpaid</button>
+                    </form>
+                  </td>
+                </tr>
+              <% } %>
+              <% }) %> 
+            </tbody>
+          </table> 
+        </div>
+      </div>
+    <%# if(user.role == 'EMPLOYEE') { %>
+    <!-- <div class="card bg-light border-danger shadow mb-3">
+      <div class="card-header"><h2>Delete</h2></div>
+      <div class="card-body"><p>Delete this employee. This cannot be undone.</p>
+        <button id="deleteToggle" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+      </div>
+    </div> -->
+    <!-- Delete quote modal -->
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Quote</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            This will permanantly delete this employee.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <form action="<%#- user.url_dashboard%>/delete" method="post">
+              <button class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <%# } %>
+      <!--  -->
+    <!-- </div> -->
+  <!-- </div> -->
+<!-- </div> -->

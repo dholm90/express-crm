@@ -1,0 +1,20 @@
+<script src="/public/javascripts/signature-pad.js"></script>
+
+<div id="" class="loginContainer container mb-5">
+  <div id="hero-image"></div>
+  <div id="hero-content">
+    <form id="sign-form" class="d-flex flex-column" action="/quote/<%- quoteId %>/signature" method="post" enctype="multipart/form-data">
+      <div>
+        <h2 class="mb-0 text-light">Sign Here:</h2>
+        <canvas id="signature" class="img-thumbnail mb-3 border-dark w-100" ></canvas>
+      </div>
+      
+      <input type="hidden" name="base64Data" id="base64Data">
+      <div>
+        <button id="sign-upload" class="btn btn-warning">Upload Signature</button>
+      </div>
+      
+    </form>
+  </div>
+  </div>
+  <script src="/public/javascripts/signature.js"></script>

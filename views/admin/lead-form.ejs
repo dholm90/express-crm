@@ -1,0 +1,51 @@
+
+<% if(locals.errors) {%> 
+  <div class="alert alert-danger">
+    <ul>
+      <% errors.forEach(err => { %>
+        <li><%- err.msg %> </li>
+      <% }) %> 
+    </ul>
+  </div>
+<%}%>
+<h1 class=""><u><%- title %></u></h1>
+<hr>
+<div class="card bg-light shadow">
+  <div class="card-body">
+    <form class="d-grid" action="" method="POST">
+      <div class="form-floating mb-3">
+        <input class="form-control" id="firstName" name="firstName" type="text" required="true" placeholder="First"  />
+        <label for="firstName">First Name:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" id="lastName" name="lastName" type="text" required="true" placeholder="Last"  />
+        <label for="lastName">Last Name:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" id="businessName" name="businessName" type="text" placeholder="Business"  />
+        <label for="businessName">Business Name:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" id="email" name="email" type="email" placeholder="name@email.com"  />
+        <label for="email">Email:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" id="phone" name="phone" type="number" placeholder="First"  />
+        <label for="phone">Phone Number:</label>
+      </div>
+
+      <textarea name="tinymce_content" id="tinymce_content"></textarea>
+      <div class="mb-3"></div>
+      <div class="form-check mb-3">
+        <label for="isContacted">Contacted:</label>
+        <input class="form-check-input" type="checkbox" name="isContacted" id="isContacted">
+      </div>
+      
+      <button class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  
+</div>
+
+
+

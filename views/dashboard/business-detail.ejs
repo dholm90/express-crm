@@ -1,0 +1,90 @@
+<% if(locals.errors) {%> 
+  <div class="alert alert-danger">
+    <ul>
+      <% errors.forEach(err => { %>
+        <li><%- err.msg %> </li>
+      <% }) %> 
+    </ul>
+  </div>
+<%}%>
+<h1 class=""><u><%- title %></u></h1>
+<hr>
+<div class="card bg-light shadow mb-4">
+  <div class="card-header h2">Update Information</div>
+
+<div class="card-body">
+  <form action="" method="post">
+    <div class="form-floating mb-3">
+      <input class="form-control" type="text" name="name" id="name" required="true" placeholder="Business" value="<%= business ? business.name : '' %>">
+      <label class="form-label" for="name">Name:</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input class="form-control" type="email" name="email" id="email" required="true" placeholder="example@email.com" value="<%= business ? business.email : '' %>">
+      <label for="email">Email:</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input class="form-control" type="tel" name="phone" id="phone" placeholder="555-555-5555" value="<%= business ? business.phone : '' %>">
+      <label for="phone">Phone:</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input class="form-control" type="text" name="street" id="treet" required="true" placeholder="Street Name" value="<%= business ? business.street : '' %>">
+      <label class="form-label" for="street">Street:</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input class="form-control" type="text" name="city" id="city" required="true" placeholder="City" value="<%= business ? business.city : '' %>">
+      <label class="form-label" for="city">City:</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input class="form-control" type="text" name="province" id="province" required="true" placeholder="Province" value="<%= business ? business.province : '' %>">
+      <label class="form-label" for="province">Province / State:</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input class="form-control" type="text" name="postal" id="postal" required="true" placeholder="1A1 A1A" value="<%= business ? business.postal : '' %>">
+      <label class="form-label" for="postal">Postal / ZIP:</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input class="form-control" type="text" name="hst" id="hst" placeholder="HST Number" value="<%= business ? business.hst : '' %>">
+      <label class="form-label" for="hst">HST / VAT: <small>(optional)</small></label>
+    </div>
+    <button class="btn btn-primary">Save</button>
+  </form>
+</div>
+</div>
+
+
+<div class="card shadow bg-light mb-4">
+  <div class="card-header h2">
+    Stripe Payments Account 
+  </div>
+  <div class="card-body">
+    <% if(locals.business.chargesEnabled == true) { %>
+      <div class="alert alert-success">Stripe setup is complete! You can now accept payments through your invoice documents.</div>
+      <a class="btn btn-primary mb-3" href="https://dashboard.stripe.com/b/<%- locals.business.stripeAcctID %>">My Stripe Account</a>
+      <% } else { %>
+      <p>Create and manage your stripe account to start collecting payments from your invoices.</p>
+      <% if(locals.business.stripeAcctID == null) { %>
+      <form class="mb-3" action="/dashboard/stripe/create-account" method="post">
+        <button class="btn btn-primary">Create Account</button>
+      </form>
+      <% } %>
+      <% if(locals.business.stripeAcctID != null) { %>
+        <div class="alert alert-warning">Click here to activate your Stripe Payments account. After you have finished inputting all required information please allow up to 1-2 hours to be able to use stripe payments. This message will be green when setup is complete.</div>
+        <form class="mb-3" action="/dashboard/stripe/create-account-link" method="post">
+          <button class="btn btn-primary">Activate Account</button>
+        </form>
+      <% } %>
+      <% } %>
+    <p class=""><small>* Each transaction is subject to a 2.9% + $1.00 payment processing fee.</small></p>
+  </div>
+</div>
+
+<div class="card bg-light shadow mb-4">
+  <div class="card-header h2">Billing</div>
+  <div class="card-body">
+    <p>Log in to your customer portal to view and manage your subscription and payment method.</p>
+    <form action="/stripe/customer-portal" method="post">
+      <button class="btn btn-primary">Customer Portal</button>
+    </form>
+  </div>
+  
+</div>

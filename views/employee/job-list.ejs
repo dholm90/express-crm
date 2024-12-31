@@ -1,0 +1,82 @@
+<!-- <div class="container d-grid mb-5"> -->
+  <div class="d-flex gap-3 align-items-center">
+    <h1 class=""><u><%- title %></u></h1>
+    <!-- <form class="" action="/dashboard/create-quote" method="get">
+      <button class=" btn btn-primary">New Quote</button>
+    </form> -->
+  </div>
+  <hr>
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header"><h2>Active</h2></div>
+    <div class="card-body">
+        <table class="table table-striped text-nowrap display-dates" style="width:100%">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Client</th>
+              <th>Total</th>
+              <th>Created By</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+            </tr>
+          </thead>
+          <tbody class="align-middle">
+            <% job_list.forEach(job => { %>
+              <% if(job.isActive) {%> 
+              <tr>
+                <td>
+                  <a class="" href="<%- job.url_employee %>"><%- job.title %></a>
+                </td>
+                <td><%= job.client ? job.client.name : 'Deleted' %></td>
+                <td>$<%- job.total %></td>
+                <td><%- job.createdBy.name %></td>
+                <td><%- job.jobStart_formatted_weekday %> </td>
+                <td><%- job.jobEnd_formatted_weekday %> </td>
+              </tr>
+              <% } %> 
+            <% }) %> 
+          </tbody>
+        </table>  
+    </div>
+  </div>
+
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header">
+        <h2>Archived</h2>
+    </div>
+      <div class="card-body">
+          <table class="table table-striped text-nowrap display-dates" style="width:100%">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Client</th>
+                <th>Total</th>
+                <th>Created By</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <% job_list.forEach(job => { %>
+                <% if(!job.isActive) {%> 
+                <tr>
+                  <td>
+                    <a class="" href="<%- job.url_employee %>"><%- job.title %></a>
+                  </td>
+                  <td><%= job.client ? job.client.name : 'Deleted' %></td>
+                  <td>$<%- job.total %></td>
+                  <td><%- job.createdBy.name %></td>
+                  <td><%- job.jobStart_formatted_weekday %> </td>
+                  <td><%- job.jobEnd_formatted_weekday %> </td>
+                </tr>
+                <% } %> 
+              <% }) %>
+            </tbody>
+          </table>  
+      </div>
+      
+  </div>
+    
+<!-- </div> -->
+
+

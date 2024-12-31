@@ -1,0 +1,68 @@
+<!-- <div class="container mb-5"> -->
+  <% if(locals.errors) {%> 
+    <div class="alert alert-danger">
+      <ul>
+        <% errors.forEach(err => { %>
+          <li><%- err.msg %> </li>
+        <% }) %> 
+      </ul>
+    </div>
+  <%}%>
+  <h1 class=""><%- title %></h1>
+  
+  <hr>
+  <!-- <div class="card bg-light shadow"> -->
+    <!-- <div class="card-body"> -->
+      <form class="" action="<%- material.url %>/update" method="POST">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="name" name="name" type="text" required="true" placeholder="2x4" value='<%= material ? material.name : '' %>'/>
+          <label for="name" class="form-label">Name:</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" id="price" name="price" type="number" step="0.01" required="true" placeholder="9.99" value='<%= material ? material.price : '' %>'/>
+          <label for="price" class="price">Price:</label>
+        </div>
+        <!-- <div class="form-floating mb-3">          
+          <input class="form-control" id="inStock" name="inStock" type="number" required="true" placeholder="0" step="1" value='<%#= material ? material.inStock : '' %>'/>
+          <label class="form-label" for="inStock">In Stock:</label>
+        </div> -->
+        <div class="form-floating mb-3">          
+          <input class="form-control" id="supplier" name="supplier" type="text" required="true" placeholder="Home Depot" value='<%= material ? material.supplier : '' %>'/>
+          <label class="form-label" for="supplier">Supplier:</label>
+        </div>
+        <%# if(results.quotes > 0 || results.jobs > 0 || results.invoces > 0) { %>
+          <!-- <div class="d-flex gap-3">
+          <div class="btn-wrapper" data-bs-toggle="tooltip" data-bs-placement="top" title="Cannot update if being used in any quotes, jobs or invoices.">
+            <button type="submit" class="btn btn-primary" disabled>Save</button>
+          </div>
+          <div class="btn-wrapper" data-bs-toggle="tooltip" data-bs-placement="top" title="Cannot delete if being used in any quotes, jobs or invoices.">
+            <button disabled id="deleteToggle" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+          </div>
+        </div> -->
+        <%# } else { %>
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button id="deleteToggle" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+
+        <%# } %>
+      </form>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Material</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              This will permanantly delete this material.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <form action="<%- material.url%>/delete" method="post">
+                <button class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- </div> -->

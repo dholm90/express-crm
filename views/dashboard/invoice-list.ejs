@@ -1,0 +1,114 @@
+<!-- <div class="container d-grid mb-5"> -->
+  <div class="d-flex gap-3 align-items-center">
+    <h1 class=""><u><%- title %></u></h1>
+    <!-- <form class="" action="/dashboard/create-quote" method="get">
+      <button class=" btn btn-primary">New Quote</button>
+    </form> -->
+  </div>
+  <hr>
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header"><h2>Active</h2></div>
+    <div class="card-body">
+        <table class="table table-striped text-nowrap display-dates-export" style="width:100%">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Client</th>
+              <th>Total</th>
+              <th>Created By</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Materials Subtotal</th>
+              <th>Services Subtotal</th>
+              <th>Hours Subtotal</th>
+              <th>Expenses Subtotal</th>
+              <th>Profit</th>
+              <th>Tax %</th>
+              <th>Markup %</th>
+              
+            </tr>
+          </thead>
+          <tbody class="align-middle">
+            <% invoice_list.forEach(invoice => { %>
+              <% if(invoice.isActive) {%> 
+              <tr>
+                <td>
+                  <a class="" href="<%- invoice.url %>"><%- invoice.title %></a>
+                </td>
+                <td><%= invoice.client ? invoice.client.name : 'Deleted' %></td>
+                <td>$<%- invoice.total.toFixed(2) %></td>
+                <td><%- invoice.createdBy.name %></td>
+                <td><%- invoice.jobStart_formatted_weekday %> </td>
+                <td><%- invoice.jobEnd_formatted_weekday %> </td>
+                <td>$<%- invoice.materials_subtotal %></td>
+                  <td>$<%- invoice.services_subtotal %></td>
+                  <td>$<%- invoice.asyncHours.toFixed(2) %></td>
+                  <td>$<%- invoice.totalExpenses %></td>
+                <td class="fw-bold <%= invoice.asyncProfit > 0 ? 'text-success' : 'text-danger' %>"><%- invoice.asyncProfit.toFixed(2) %></td>
+                <td><%- invoice.tax %></td>
+                <td><%- invoice.markup %></td>
+                
+              </tr>
+              <% } %> 
+            <% }) %> 
+          </tbody>
+        </table>  
+    </div>
+  </div>
+
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header">
+        <h2>Archived</h2>
+    </div>
+      <div class="card-body">
+          <table class="table table-striped text-nowrap display-dates-export" style="width:100%">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Client</th>
+                <th>Total</th>
+                <th>Created By</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Materials Subtotal</th>
+              <th>Services Subtotal</th>
+              <th>Hours Subtotal</th>
+              <th>Expenses Subtotal</th>
+                <th>Profit</th>
+                <th>Tax %</th>
+                <th>Markup %</th>
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <% invoice_list.forEach(invoice => { %>
+                <% if(!invoice.isActive) {%> 
+                <tr>
+                  <td>
+                    <a class="" href="<%- invoice.url %>"><%- invoice.title %></a>
+                  </td>
+                  <td><%= invoice.client ? invoice.client.name : 'Deleted' %></td>
+                  <td>$<%- invoice.total.toFixed(2) %></td>
+                  <td><%- invoice.createdBy.name %></td>
+                  <td><%- invoice.jobStart_formatted_weekday %> </td>
+                  <td><%- invoice.jobEnd_formatted_weekday %> </td>
+                  <td>$<%- invoice.materials_subtotal %></td>
+                  <td>$<%- invoice.services_subtotal %></td>
+                  <td>$<%- invoice.asyncHours.toFixed(2) %></td>
+                  <td>$<%- invoice.totalExpenses %></td>
+                  <td class="fw-bold <%= invoice.asyncProfit > 0 ? 'text-success' : 'text-danger' %>"><%- invoice.asyncProfit.toFixed(2) %></td>
+                  <td><%- invoice.tax %></td>
+                  <td><%- invoice.markup %></td>
+                  
+                </tr>
+                <% } %> 
+              <% }) %> 
+            </tbody>
+          </table>  
+      </div>
+      
+  </div>
+
+    
+<!-- </div> -->
+
+

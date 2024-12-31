@@ -1,0 +1,31 @@
+<div class="d-flex flex-wrap text-nowrap gap-3">
+  <h2 class=""><u><%- title %></u></h2>
+  <form class="" action="/admin/lead-form" method="get">
+    <button class=" btn btn-primary">New Lead</button>
+  </form>
+</div>
+<hr>
+<table class="table dt-resposinve display" style="width:100%;">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Business</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Contacted?</th>
+    </tr>
+    
+  </thead>
+  <tbody>
+    <% leads.forEach(lead => { %>
+      <tr>
+        <td><a href="<%- lead.url %>"><%- lead.name %></a></td>
+        <td><%- lead.businessName %></td>
+        <td><a href="mailto:<%- lead.email %>"><%- lead.email %></a></td>
+        <td><a href="tel:+<%- lead.phone %>"><%= phoneHelper.formatPhoneNumber(lead.phone) %></a></td>
+        <td><%- lead.isContacted %></td>
+      </tr>
+      
+    <% }) %>
+  </tbody>
+</table>

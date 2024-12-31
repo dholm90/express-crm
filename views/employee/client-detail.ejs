@@ -1,0 +1,87 @@
+<!-- <div class="container mb-5"> -->
+  <% if(locals.errors) {%> 
+    <div class="alert alert-danger">
+      <ul>
+        <% errors.forEach(err => { %>
+          <li><%- err.msg %> </li>
+        <% }) %> 
+      </ul>
+    </div>
+  <%}%>
+  <div class="d-flex justify-content-between gap-3">
+    <!-- <div class="d-flex gap-3 align-items-center"> -->
+      <h1 class=""><u><%- client.name %></u></h1>
+      
+    <!-- </div> -->
+    <!-- <div class="d-flex align-items-center">
+      <button id="deleteToggle" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+    </div> -->
+  </div>
+  <hr>
+  <!-- <div class="card bg-light shadow mb-5"> -->
+    <!-- <div class="card-body"> -->
+      <form class="mb-5" action="<%- client.url_employee %>/update" method="POST">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="firstName" name="firstName" type="text" required="true" placeholder="Name" value='<%= client ? client.firstName : '' %>' />
+          <label for="firstName">First Name:</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" id="lastName" name="lastName" type="text" required="true" placeholder="Last Name" value='<%= client ? client.lastName : '' %>'/>
+          <label for="lastName">Last Name:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="email" name="email" type="email" required="true" placeholder="example@email.com" value='<%= client ? client.email : '' %>' />
+          <label class="" for="email">Email:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="phone" name="phone" type="tel" required="true" placeholder="5555555555" value='<%= client ? client.phone : '' %>'/>  
+          <label class="form-label" for="phone">Phone Number:</label>    
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="street" name="street" type="text" placeholder="1234 Real St." value='<%= client ? client.street : '' %>'/>
+          <label class="form-label" for="street">Street:</label>  
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="city" name="city" type="text" placeholder="Toronto" value='<%= client ? client.city : '' %>'/> 
+          <label class="form-label" for="city">City:</label> 
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="province" name="province" type="text" placeholder="Ontario" value='<%= client ? client.province : '' %>'/>  
+          <label class="form-label" for="province">Province / State:</label>
+        </div>
+        <div class="form-floating mb-3">
+
+          <input class="form-control" id="postal" name="postal" type="text" placeholder="A1A1A1" value='<%= client ? client.postal : '' %>'/>  
+          <label class="form-label" for="postal">Postal / Zip Code:</label>
+        </div>
+        <button class="btn btn-primary">Save</button>
+      </form>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Client</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          This will permanantly delete this client and all associated invoices.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form action="<%- client.url_employee%>/delete" method="post">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+      
+    
+  
+<!-- </div> -->

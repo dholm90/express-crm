@@ -1,0 +1,60 @@
+<div class="container pt-3">
+  <div class="d-flex flex-wrap text-nowrap gap-3">
+    <h2 class=""><u>Documentation Articles</u></h2>
+    <form class="" action="/admin/doc-form" method="get">
+      <button class=" btn btn-primary">New Doc</button>
+    </form>
+    <form action="/admin/doc-list/unpublish-all" method="post">
+      <button class="btn btn-danger">Unpublish All</button>
+    </form>
+    <form action="/admin/doc-list/publish-all" method="post">
+      <button class="btn btn-success">Publish All</button>
+    </form>
+  </div>
+  
+  <h3 class="">Unpublished</h3>
+  <hr>
+  <table class="table dt-resposinve display" style="width:100%;">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Parent Page</th>
+        <th>Created On</th>
+      </tr>
+      
+    </thead>
+    <tbody>
+      <% unpublished_docs.forEach(doc => { %>
+        <tr>
+          <td><a href="<%- doc.url %>"><%- doc.title %></a></td>
+        <td><%- doc.parent %></td>
+        <td><%- doc.createdAt_formatted %></td>
+        </tr>
+        
+      <% }) %>
+    </tbody>
+  </table>
+  
+  <h3 class="">Published</h3>
+  <hr>
+  <table class="table dt-resposinve display" style="width:100%;">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Parent Page</th>
+        <th>Created On</th>
+      </tr>
+      
+    </thead>
+    <tbody>
+      <% published_docs.forEach(doc => { %>
+        <tr>
+          <td><a href="<%- doc.url %>"><%- doc.title %></a></td>
+        <td><%- doc.parent %></td>
+        <td><%- doc.createdAt_formatted %></td>
+        </tr>
+        
+      <% }) %>
+    </tbody>
+  </table>
+</div>

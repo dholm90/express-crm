@@ -1,0 +1,170 @@
+<h1 class="mb-4"><u>Welcome <%- locals.currentUser.firstName %></u></h1>
+<hr>
+<% let business = locals.business; %>
+<% let user = locals.currentUser; %>
+<% if(business.name == null || business.email == null || business.phone == null || business.street == null || business.city == null || business.province == null || business.postal == null) { %>
+<div class="alert alert-danger">
+  <p>Please fill out your business profile to send emails and download PDFs.</p>
+  <form class="" action="/dashboard/business-detail" method="get">
+    <button class="btn btn-primary">Business Profile</button>
+  </form>
+</div>
+<% } %>
+<% if(user.email == null || user.firstName == null || user.lastName == null || user.phone == null || user.street == null || user.city == null || user.province == null || user.postal == null) { %>
+<div class="alert alert-danger"><p>Please fill out your user profile to send emails and download PDFs.</p>
+  <form class="" action="/dashboard/update" method="get">
+    <button class="btn btn-primary">User Profile</button>
+  </form>
+</div>
+
+<% } %>
+<% if(locals.business.chargesEnabled == false) { %>
+<div class="alert alert-danger">
+  <p>Activate your Stripe account to accept payments.</p>
+  <form class="" action="/dashboard/stripe/create-account-link" method="post">
+    <button class="btn btn-primary">Activate Account</button>
+  </form>
+</div>
+<% } %>
+<div class="card bg-light shadow mb-4 col-12">
+  <div class="card-header h2">
+    Earnings
+  </div>
+  <div class="card-body d-flex flex-column justify-content-between">
+    <div>
+      
+      <p class="h5">This month:</p>
+      <p class="h1">$<%- results.getData.thisMonthTotal.toFixed(2) %>
+        <% if(results.getData.percentageDifference > 0) {%> 
+          <span class="text-success h3">+<%- results.getData.percentageDifference %>%</span>
+        <% } else { %>
+          <span class="text-danger h3"><%- results.getData.percentageDifference == NaN ? results.getData.percentageDifference : 0 %>%</span>
+        <% } %> 
+      </p> 
+
+    </div>
+    <div>  
+      <p class="h5">Last month:</p>
+      <p class="h1">$<%= results.getData.lastMonthTotal.toFixed(2)  %> </p> 
+    </div>
+    <div style="height: 350px;">
+      <canvas id="myChart" style="width:100%"></canvas>
+    </div>
+    
+
+    <script>
+      const months = JSON.parse('<%- JSON.stringify(results.getData.lastTwelveMonths) %>');
+      let monthsData = [];
+      const totals = JSON.parse('<%- JSON.stringify(results.getData.lastTwelveTotals) %>');
+      let totalsData = [];
+
+      for(var i = 0; i < months.length; i++){
+        monthsData.push(months[i]);
+        totalsData.push(totals[i]);
+      }
+      // console.log(monthsData)
+      const myChart = new Chart("myChart", {
+        type: "line",
+        data: {
+          labels: monthsData,
+          datasets: [
+            {
+              label: "Earnings",
+              backgroundColor: "rgba(52, 110, 253, 0.2)",
+              borderColor: "rgb(52, 110, 253)",
+              borderWidth: 2,
+              hoverBackgroundColor: "rgba(52, 110, 253, 0.4)",
+              hoverBorderColor: "rgb(52, 110, 253)",
+              data: totalsData,
+            }
+          ]
+          },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      })
+    </script>
+    
+  </div>
+</div>
+
+<div class="card bg-light shadow mb-4">
+  <div class="card-header h2">
+    Top Performers
+  </div>
+  <div class="card-body">
+    <div>
+      <div style="height: 350px;">
+        <canvas id="topPerformers" style="width:100%"></canvas>
+      </div>
+
+      <script>
+        const performers = JSON.parse('<%- JSON.stringify(results.topPerformers) %>');
+        performers.sort((a,b) => a.value - b.value);
+        let names = [];
+        
+        let totalData = [];
+  
+        for(var i = 0; i < performers.length; i++){
+          names.push(performers[i].name);
+          totalData.push(performers[i].value)
+          // totalsData.push(totals[i]);
+        }
+        // console.log(performersData)
+        const topPerformers = new Chart("topPerformers", {
+          type: "bar",
+          data: {
+            labels: names,
+            datasets: [
+              {
+                label: "All Time Earnings",
+                backgroundColor: "rgba(52, 110, 253, 0.2)",
+                borderColor: "rgb(52, 110, 253)",
+                borderWidth: 2,
+                hoverBackgroundColor: "rgba(52, 110, 253, 0.4)",
+                hoverBorderColor: "rgb(52, 110, 253)",
+                data: totalData,
+              },
+              // {
+              //   label: "This Month",
+              //   backgroundColor: "rgba(52, 110, 253, 0.2)",
+              //   borderColor: "rgb(52, 110, 253)",
+              //   borderWidth: 2,
+              //   hoverBackgroundColor: "rgba(52, 110, 253, 0.4)",
+              //   hoverBorderColor: "rgb(52, 110, 253)",
+              //   data: totalData,
+              // },
+
+            ]
+            },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false
+          }
+        })
+      </script>
+    </div>
+    
+  </div>
+</div>
+<div class="card bg-light shadow mb-4">
+  <div class="card-header h2">
+    Website Statistics
+  </div>
+  <div class="card-body container">
+    <div class="row row-cols-2 g-2">
+      
+      <h5 class="">Employees: <span class=""><%- results.countEmployees %></span></h5>
+      <h5 class="">Clients: <span class=""><%- results.countClients %></span></h5>
+      <h5 class="">Materials: <span class=""><%- results.countMaterials %></span></h5>
+      <h5 class="">Services: <span class=""><%- results.countServices %></span></h5>
+      <h5 class="">Active Quotes: <span class=""><%- results.countActiveQuotes %></span></h5>
+      <h5 class="">Archived Quotes: <span class=""><%- results.countArchivedQuotes %></span></h5>
+      <h5 class="">Active Jobs: <span class=""><%- results.countActiveJobs %></span></h5>
+      <h5 class="">Archived Jobs: <span class=""><%- results.countArchivedJobs %></span></h5>
+      <h5 class="">Active Invoices: <span class=""><%- results.countActiveInvoices %></span></h5>
+      <h5 class="">Archived Invoices: <span class=""><%- results.countArchivedInvoices %></span></h5>
+    </div>
+  </div>
+</div>

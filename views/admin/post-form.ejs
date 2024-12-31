@@ -1,0 +1,43 @@
+<div class="container mb-5">
+  <% if(locals.errors) {%> 
+    <div class="alert alert-danger">
+      <ul>
+        <% errors.forEach(err => { %>
+          <li><%- err.msg %> </li>
+        <% }) %> 
+      </ul>
+    </div>
+  <%}%>
+  <h1 class=""><u><%- title %></u></h1>
+  <hr>
+  <div class="card bg-light shadow">
+    <div class="card-body">
+      <form class="d-grid" action="" enctype="multipart/form-data" method="POST">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="title" name="title" type="text" required="true" placeholder="Title"  />
+          <label for="title">Title:</label>
+        </div>
+        <input class="mb-3" type="file" name="image">
+        <div class="form-floating mb-3">
+          <textarea class="form-control" id="metaDescription" name="metaDescription" required="true" placeholder="Meta description"></textarea>
+          <label for="metaDescription">Meta Description:</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" id="metaKeywords" name="metaKeywords" type="text" required="true" placeholder="Meta keywords"  />
+          <label for="metaKeywords">Meta Keywords:</label>
+        </div>
+        <textarea name="tinymce_content" id="tinymce_content"></textarea>
+        <div class="mb-3"></div>
+        <div class="form-check mb-3">
+          <label for="isPublished">Publish this post</label>
+          <input class="form-check-input" type="checkbox" name="isPublished" id="isPublished">
+        </div>
+        
+        <button class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    
+  </div>
+</div>
+  
+

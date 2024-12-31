@@ -1,0 +1,17 @@
+<h1 class="mb-3">Opt Ins</h1>
+<table class="table dt-responsive display">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Date Sent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% optin_list.forEach(optin => { %>
+      <tr>
+        <td><%- optin.email %></td>
+        <td><%- optin.date_formatted %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

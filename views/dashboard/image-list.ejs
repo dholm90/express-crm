@@ -1,0 +1,43 @@
+<h1><u><%- title %></u></h1>
+<hr>
+
+<div class="card bg-light shadow mb-4">
+  <div class="card-header h2">In Use</div>
+  <div class="card-body image-card container">
+      <div class="row row-cols-2 row-cols-lg-4 g-3">
+        <% images.forEach(image => { %> 
+          <% if(image.quote || image.job || image.invoice) {%> 
+            <a class="col" href="<%- image.imageUrl %>" >
+              <!-- <div class="thumbnail-item"> -->
+                  <img class="img-thumbnail" alt="<%- image.originalName %>" src="<%- image.imageUrl %>" >
+
+              <!-- </div> -->
+            </a>
+          <% } %> 
+        <% }) %> 
+      </div>
+       
+  </div>
+</div>
+
+<div class="card bg-light shadow mb-4">
+  <div class="card-header h2">Unused</div>
+  <div class="card-body image-card container">
+      <div class="row row-cols-2 row-cols-lg-4 g-3 ">
+          <% unused.forEach(image => { %> 
+           <div class="col">
+            <a class="parent-link" href="<%- image.imageUrl %>" >
+              <img class="child-img img-thumbnail mb-1" alt="<%- image.originalName %>" src="<%- image.imageUrl %>" >
+              <form class="child-delete" action="<%- image.url %>/delete" method="post">
+                <button type="submit" class="btn bg-danger text-white rounded-pill"><svg class="bi" width="16" height="16"><use xlink:href="#close"/></svg></button>
+              </form>
+            </a>
+            
+           </div>
+
+          <% }) %> 
+      </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,44 @@
+<div class="container mb-5">
+  <% if(locals.errors) {%> 
+    <div class="alert alert-danger">
+      <ul>
+        <% errors.forEach(err => { %>
+          <li><%- err.msg %> </li>
+        <% }) %> 
+      </ul>
+    </div>
+  <%}%>
+  <h1 class=""><u><%- title %></u></h1>
+  <hr>
+  <div class="card bg-light shadow">
+    <div class="card-body">
+      <form class="d-grid" action="" method="POST">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="title" name="title" type="text" required="true" placeholder="Title" value="<%= doc ? doc.title : '' %>" />
+          <label for="title">Title:</label>
+        </div>
+        
+        <div class="form-floating mb-3">
+          <textarea class="form-control" id="parent" name="parent" required="true" placeholder="Home"><%= doc ? doc.parent : '' %></textarea>
+          <label for="parent">Parent Page:</label>
+        </div>
+        
+        <textarea name="tinymce_content" id="tinymce_content"><%= doc ? doc.content : '' %></textarea>
+        <div class="mb-3"></div>
+        <div class="form-check mb-3">
+          <label for="isPublished">Publish this article</label>
+          <input class="form-check-input" type="checkbox" name="isPublished" id="isPublished" 
+          <% if(doc) {%>
+            <%= doc.isPublished ? 'checked' : '' %>
+          <% } %>
+          >
+        </div>
+        
+        <button class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    
+  </div>
+</div>
+  
+

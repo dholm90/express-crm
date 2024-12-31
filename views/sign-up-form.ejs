@@ -1,0 +1,62 @@
+<div id="" class="loginContainer container mb-5">
+  <div id="hero-image"></div>
+  <div id="hero-content">
+    <div class="d-flex flex-column">
+      <h1 class="h1 text-center mt-5 text-light">Sign Up - 30 Day Free Trial</h1>
+      <p class="lead text-light">We understand that privacy and data safety are top priorities for our users, and we take these concerns seriously. You can trust that your information will be kept safe and secure with our state-of-the-art encryption, hashing, and data protection measures. Sign up now to streamline your business operations and take your contracting business to the next level.</p>
+      <form class="d-grid mb-3" action="/sign-up" method="POST">
+        <!-- User Info -->
+        <div class="form-floating mb-3">
+          <input name="firstName" type="text" class="form-control" placeholder="Name" required value="<%= form ? form.firstName : '' %>" />
+          <label for="firstName">First Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input name="lastName" type="text" class="form-control" placeholder="Last" required value="<%= form ? form.lastName : '' %>" />
+          <label for="lastName">Last Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input name="businessName" type="text" class="form-control" placeholder="Business" required value="<%= form ? form.businessName : '' %>"/>
+          <label for="businessName">Business Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input name="email" type="email" class="form-control" placeholder="name@email.com" required value="<%= form ? form.email : '' %>" />
+          <label for="email">Email</label>
+        </div>
+        <div class="form-floating mb-3 d-flex">
+          <input id="password" name="password" type="password" class="form-control" placeholder="password" required value="<%= form ? form.password : '' %>" />
+          <label for="password">Password</label>
+          <i class="bi bi-eye-slash fs-3" style="margin-left:-40px; margin-top: 10px;" id="togglePassword"></i>
+          
+        </div>
+        <div class="form-floating mb-3 d-flex">
+          <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" placeholder="confirmPassword" required />
+          <label for="confirmPassword">Confirm Password</label>
+          <i class="bi bi-eye-slash fs-3" style="margin-left:-40px; margin-top: 10px;" id="toggleConfirmPassword"></i>
+        </div>
+        
+
+        <!-- Business info -->
+    
+    
+    
+        <button class="btn btn-lg btn-warning">Sign Up</button>
+      </form>
+      <% if(locals.errors) {%> 
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            <% errors.forEach(err => { %>
+              <li><%- err.msg %> </li>
+            <% }) %> 
+          </ul>
+        </div>
+      <%}%>
+    </div>
+    
+  </div>
+ 
+</div>
+
+<script src="/public/javascripts/passwordToggler.js"></script>
+
+
+

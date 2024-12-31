@@ -1,0 +1,418 @@
+<script src="/public/javascripts/signature-pad.js"></script>
+
+<!-- <div class="container mb-5"> -->
+  <% if(locals.errors) {%> 
+    <div class="alert alert-danger">
+      <ul>
+        <% errors.forEach(err => { %>
+          <li><%- err.msg %> </li>
+        <% }) %> 
+      </ul>
+    </div>
+  <%}%>
+  
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header">
+      <h1 class=""><%- title %></h1>
+    </div>
+    <div class="card-body">
+      <form class="" action="<%- quote.url %>/update" method="POST">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="title" name="title" type="text" required="true" placeholder="Invoice 1" value='<%= quote ? quote.title : '' %>' />
+          <label for="title" class="form-label">Title:</label>
+        </div>
+        <div class="form-floating mb-3">
+          <select class="form-select" id="client" name="client" placeholder="Client Name">
+            <% if(quote.client) {%> 
+            <% clients.forEach(client => { %>
+              <option value="<%- client._id %>" <%= quote.client.equals(client._id) ? 'selected' : '' %>><%- client.name %></option>
+            <% }) %>
+            <% } else { %>
+              <option value="">Select</option>
+            <% clients.forEach(client => { %>
+
+              <option value="<%- client._id %>"><%- client.name %></option>
+            <% }) %>
+            <% } %>
+          </select> 
+          <label for="client">Client:</label>
+        </div>
+        
+        <div class="form-floating mb-3">
+          <input class="form-control" type="date" name="jobStart" id="jobStart" required="true" placeholder="01/01/2022" value='<%= quote ? quote.jobStart_formatted : '' %>'>
+          <label for="jobStart">Job Start:</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" type="date" name="jobEnd" id="jobEnd" required="true" placeholder="01/01/2022" value='<%= quote ? quote.jobEnd_formatted : '' %>'>
+          <label for="jobEnd">Completed By:</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" type="number" name="tax" id="tax" min="0" max="100" required="true" placeholder="13" value='<%= quote ? quote.tax : '' %>'>
+          <label for="tax">Tax %:</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" type="number" name="markup" id="markup" min="0" required="true" placeholder="10" value='<%= quote ? quote.markup : '' %>'>
+          <label for="markup">Material Markup %:</label>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Save</button>
+        
+
+      </form>
+    </div>
+  </div>
+
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header">
+      <h2>Employees</h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped text-nowrap display" style="width:100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody class="align-middle">
+            <% quote.employees.forEach(employee => { %>
+              <tr>
+                <td><%- employee.name %></td>
+                <td><%- employee.email %></td>
+                <td><%- employee.phone %></td>
+                <td>
+                  <form action="<%- quote.url %>/remove-employee/<%- employee._id %>" method="post">
+                    <button class="btn btn-close btn-danger"></button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %> 
+          </tbody>
+        </table>
+      <form action="<%- quote.url %>/add-employee" method="post">
+          
+        <div class="form-floating mb-3">
+          <select class="form-select mb-3" id="employee" name="employee" required="true" placeholder="Employee Name">
+            <% employees.forEach(employee => { %>
+              <option value="<%- employee._id %>"><%- employee.name %></option>
+            <% }) %>
+          </select>
+          <label for="employee">Employee:</label>
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Add Employee</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header d-flex gap-3">
+      <h2>Materials</h2>
+      <form>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newMaterial">New Material</button>
+      </form>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped text-nowrap display" style="width:100%">
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Quantity</th>
+              <th>Price/Item</th>
+              <th>Total</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody class="align-middle">
+            <% quote.materials.forEach(material => { %>
+              <tr>
+                <td><%- material.name %></td>
+                <td><%- material.qty %></td>
+                <td>$<%- ( material.price * (1 + (0.01 * quote.markup))).toFixed(2) %> </td>
+                <td>$<%= (material.qty * material.price * (1 + (0.01 * quote.markup))).toFixed(2) %></td>
+                <td>
+                  <form action="<%- quote.url %>/remove-material/<%- material._id %>" method="post">
+                    <button class="btn btn-close btn-danger"></button>
+                  </form>
+                </td>
+                
+              </tr>
+            <% }) %> 
+          </tbody>
+        </table> 
+        <form action="<%- quote.url %>/add-material" method="post">
+        
+          <div class="form-floating mb-3">
+            <select class="form-select mb-3" id="material" name="material" required="true" placeholder="Material Name">
+              <% materials.forEach(material => { %>
+                <option value="<%- material._id %>"><%- material.name %></option>
+              <% }) %>
+            </select>
+            <label for="material">Material:</label>
+          </div>
+          
+          <div class="form-floating mb-3">
+            <input class="form-control" type="number" name="materialQty" id="materialQty" min="1" step="1" required="true" placeholder="13">
+            <label for="materialQty">Quantity:</label>
+          </div>
+          <button class="btn btn-primary" type="submit">Add Material</button>
+        </form>
+    </div>
+  </div>
+
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header d-flex gap-3">
+      <h2>Services</h2>
+      <form>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newService">New Service</button>
+      </form>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped text-nowrap display" style="width:100%">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody class="align-middle">
+            <% quote.services.forEach(service => { %>
+              <tr>
+                <td><%- service.title %></td>
+                <td><%- service.description %></td>
+                <td>$<%- service.price.toFixed(2) %> </td>
+                <td>
+                  <form action="<%- quote.url %>/remove-service/<%- service._id %>" method="post">
+                    <button class="btn btn-close btn-danger"></button>
+                  </form>
+                </td>
+                
+              </tr>
+            <% }) %> 
+          </tbody>
+        </table> 
+        
+        <form action="<%- quote.url %>/add-service" method="post">
+          
+          <div class="form-floating mb-3">
+            <select class="form-select mb-3" id="service" name="service" required="true" placeholder="Service Title">
+              <% services.forEach(service => { %>
+                <option value="<%- service._id %>"><%- service.title %></option>
+              <% }) %>
+            </select>
+            <label for="service">Service:</label>
+          </div>
+          
+          <button class="btn btn-primary" type="submit">Add Service</button>
+        </form>
+    </div>
+  </div>
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header"><h2>Images</h2></div>
+    <div class="card-body image-card container">
+      <div class="row row-cols-1 row-cols-lg-4 g-3 mb-3">
+        <% quote.images.forEach(image => { %> 
+         <div class="col">
+          <a class="parent-link" href="<%- image.imageUrl %>" >
+            <img class="child-img img-thumbnail mb-1" alt="<%- image.originalName %>" src="<%- image.imageUrl %>" >
+            <form class="child-delete" action="<%- quote.url %>/image/<%- image._id %>/delete" method="post">
+              <button type="submit" class="btn bg-danger text-white rounded-pill"><svg class="bi" width="16" height="16"><use xlink:href="#close"/></svg></button>
+            </form>
+          </a>
+          
+         </div>
+
+        <% }) %> 
+    </div>
+      <form action="<%- quote.url %>/upload-images" enctype="multipart/form-data" method="post">
+        <input class="form-control mb-3" multiple="multiple" type="file" accept="image/*" name="images" id="images" required="true">
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header d-flex gap-3">
+      <h2>PDF</h2>
+      <% let business = locals.business; %>
+      <% let user = locals.currentUser; %> 
+      <% if(business.name == null || business.email == null || business.phone == null || business.street == null || business.city == null || business.province == null || business.postal == null || user.email == null || user.firstName == null || user.lastName == null || user.phone == null || user.street == null || user.city == null || user.province == null || user.postal == null) { %>
+      <form class="" action="<%- quote.url %>/download" method="get">
+        <div class="btn-wrapper" data-bs-toggle="tooltip" data-bs-placement="top" title="Complete business and user profile.">
+          <button class="btn btn-primary" disabled>Download</button>
+        </div>
+      </form>
+      <form class="" action="<%- quote.url %>/send-email" method="post">
+        <div class="btn-wrapper" data-bs-toggle="tooltip" data-bs-placement="top" title="Complete business and user profile.">
+          <button class="btn btn-primary" disabled>Email</button>
+        </div>
+      </form>
+      <% } else { %>
+        <form class="" action="<%- quote.url %>/download" method="get">
+          <button class="btn btn-primary undisabled">Download</button>
+        </form>
+        <form class="" action="<%- quote.url %>/send-email" method="post">
+          <button class="btn btn-primary">Email</button>
+        </form> 
+      <% } %>
+    </div>
+    <div class="card-body">
+      <%- include('quote-render.ejs') %> 
+    </div>
+  </div>
+
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header"><h2>Signature</h2></div>
+    <div class="card-body">
+      <% if(signatureURL != null) {%>
+      <img src="<%- signatureURL %>" class="img-fluid img-thumbnail mb-3" alt="">
+      <form class="mb-3" action="<%- quote.url %>/delete-signature" method="post">
+        <button class="btn btn-danger">Delete</button>
+      </form>
+      <% } %>
+      <form id="sign-form" class="d-flex flex-column" action="<%- quote.url %>/upload-signature" method="post" enctype="multipart/form-data">
+        <div>
+          <p class="mb-0">Sign Here:</p>
+          <canvas id="signature" class="img-thumbnail mb-3 border-dark h-100 w-100"></canvas>
+        </div>
+        <input type="hidden" name="base64Data" id="base64Data">
+        <div>
+          <button id="sign-upload" class="btn btn-primary">Upload</button>
+        </div>   
+      </form>
+    </div>
+  </div>
+
+ 
+  <% if(quote.isActive) {%> 
+  <div class="card bg-light shadow mb-4">
+    <div class="card-header"><h2>Archive Quote</h2></div>
+    <div class="card-body"><p>Archive this quote to create a job.</p>
+      <form action="<%- quote.url %>/sign-off"  method="post">
+        <button type="submit" class="btn btn-primary">Archive Quote</button>
+      </form>    
+    </div>
+  </div>
+  <% } %> 
+  <% if(!quote.isActive) {%> 
+    <div class="card bg-light shadow mb-4">
+      <div class="card-header"><h2>Reset Quote</h2></div>
+      <div class="card-body"><p>Reset this quote. Quote will become active again.</p>
+        <form action="<%- quote.url %>/reset-quote"  method="post">
+          <button id="reset" type="submit" class="btn btn-primary undisabled">Reset Quote</button>
+        </form>    
+      </div>
+    </div>
+    <% } %> 
+
+  <div class="card bg-light border-danger shadow mb-4">
+    <div class="card-header"><h2>Delete</h2></div>
+    <div class="card-body"><p>Delete this quote. This cannot be undone.</p>
+      <button id="deleteToggle" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+    </div>
+  </div>
+
+  <!-- <div class="card bg-light shadow">
+    <div class="card-header"></div>
+    <div class="card-body"></div>
+  </div> -->
+      
+      <!-- Delete quote modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Quote</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              This will permanantly delete this quote.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <form action="<%- quote.url%>/delete" method="post">
+                <button class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- new material modal -->
+      <div class="modal fade" id="newMaterial" tabindex="-1" aria-labelledby="newMaterialLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="newMaterialLabel">New Material</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="" action="<%- quote.url %>/new-material" method="POST">
+              <div class="modal-body">
+                <div class="form-floating mb-3">
+                  <input class="form-control" id="name" name="name" type="text" required="true" placeholder="2x4"/>
+                  <label for="name" class="form-label">Name:</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input class="form-control" id="price" name="price" type="number" step="0.01" required="true" placeholder="9.99" />
+                  <label for="price" class="price">Price:</label>
+                </div>
+                <div class="form-floating mb-3">          
+                  <input class="form-control" id="supplier" name="supplier" type="text" required="true" placeholder="Home Depot"/>
+                  <label class="form-label" for="supplier">Supplier:</label>
+                </div>
+          
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                <button type="submit" class="btn btn-primary">Create Material</button>
+              </div>
+              
+            </form>
+            
+          </div>
+        </div>
+      </div>
+      <!-- new service modal -->
+      <div class="modal fade" id="newService" tabindex="-1" aria-labelledby="newMaterialLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="newMaterialLabel">New Service</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="" action="<%- quote.url %>/new-service" method="POST">
+              <div class="modal-body">
+                <div class="form-floating mb-3">
+                  <input class="form-control" id="title" name="title" type="text" required="true" placeholder="Invoice 1" />
+                  <label for="title" class="form-label">Title:</label>
+                </div>
+                <div class="form-floating mb-3">
+                  
+                  <textarea class="form-control" id="description-area" name="description" required="true" placeholder="Description" > </textarea>
+                  <label for="description-area" class="form-label">Description:</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                  <input class="form-control" type="number" name="price" id="price" min="0" step=".01" required="true" placeholder="13"/>
+                  <label for="price">Price:</label>
+                </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                <button type="submit" class="btn btn-primary">Create Service</button>
+              </div>
+              
+            </form>
+            
+          </div>
+        </div>
+      </div>
+<!-- </div> -->
+<% if(!quote.isActive) { %>
+  <script src="/public/javascripts/disableButtons.js"></script>
+<% } %>
+<script src="/public/javascripts/signature.js"></script>

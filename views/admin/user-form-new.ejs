@@ -1,0 +1,74 @@
+<div class="container mb-5">
+  <% if(locals.errors) {%> 
+    <div class="alert alert-danger">
+      <ul>
+        <% errors.forEach(err => { %>
+          <li><%- err.msg %> </li>
+        <% }) %> 
+      </ul>
+    </div>
+  <%}%>
+  <h1 class="">Create New User</h1>
+  <hr>
+  <div class="card bg-light shadow">
+    <div class="card-body">
+      <form class="d-grid" action="" method="POST">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="firstName" name="firstName" type="text" required="true" placeholder="John" value='<%= user ? user.firstName : '' %>' />
+          <label class="form-label">First Name:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="lastName" name="lastName" type="text" required="true" placeholder="Doe" value='<%= user ? user.lastName : '' %>'/>
+          <label for="lastName" class="form-label">Last Name:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="email" name="email" type="email" required="true" placeholder="example@email.com" value='<%= user ? user.email : '' %>' />
+          <label class="form-label" for="email">Email:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="password" name="password" type="text" required="true" placeholder="secretPassword" value='<%= user ? user.password : '' %>'/>  
+          <label class="form-label" for="password">Password:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="businessName" name="businessName" type="text" placeholder="Your Business Name" value='<%= user ? user.businessName : '' %>'/>  
+          <label class="form-label" for="businessName">Business Name:</label>
+        </div>
+        <div class="form-floating mb-3">
+            
+          <input class="form-control" id="phone" name="phone" type="tel" placeholder="5555555555" value='<%= user ? user.phone : '' %>'/>    
+          <label class="form-label" for="phone">Phone Number:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="street" name="street" type="text" placeholder="123 Real St" value='<%= user ? user.street : '' %>'/>  
+          <label class="form-label" for="street">Street:</label>
+        </div>
+        <div class="form-floating mb-3">
+
+          <input class="form-control" id="city" name="city" type="text" placeholder="Toronto" value='<%= user ? user.city : '' %>'/>  
+          <label class="form-label" for="city">City:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="province" name="province" type="text" placeholder="Ontario" value='<%= user ? user.province : '' %>'/>  
+          <label class="form-label" for="province">Province / State:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="postal" name="postal" type="text" placeholder="1A1A1A"  value='<%= user ? user.postal : '' %>'/>  
+          <label class="form-label" for="postal">Postal / Zip Code:</label>
+        </div>
+        <div class="form-floating mb-3">
+          
+          <input class="form-control" id="hst" name="hst" type="text" placeholder="1234567 HG" value='<%= user ? user.hst : '' %>'/>  
+          <label class="form-label" for="hst">HST / VAT:</label>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

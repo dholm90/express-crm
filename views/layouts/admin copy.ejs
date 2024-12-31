@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if(locals.title) {%> 
+    <title><%- title %></title>
+  <% } else {%>
+    <title>Page Not Found</title>
+  <%}%>
+  <link rel="icon" type="image/x-icon" href="/public/images/favicon.ico">
+  <link rel="stylesheet" href="/public/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/public/stylesheets/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="/public/DataTables/DataTables-1.13.2/css/dataTables.bootstrap5.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="/public/DataTables/Buttons-2.3.4/css/buttons.bootstrap5.css"/> -->
+<link rel="stylesheet" type="text/css" href="/public/DataTables/Responsive-2.4.0/css/responsive.bootstrap5.css"/>
+
+<script defer src="/public/javascripts/bootstrap.bundle.min.js"></script>
+
+<script defer type="text/javascript" src="/public/DataTables/jQuery-3.6.0/jquery-3.6.0.js"></script>
+<!-- <script defer type="text/javascript" src="/public/DataTables/JSZip-2.5.0/jszip.js"></script> -->
+<!-- <script type="text/javascript" src="/public/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script> -->
+<!-- <script type="text/javascript" src="/public/DataTables/pdfmake-0.1.36/vfs_fonts.js"></script> -->
+<script defer type="text/javascript" src="/public/DataTables/DataTables-1.13.2/js/jquery.dataTables.js"></script>
+<script defer type="text/javascript" src="/public/DataTables/DataTables-1.13.2/js/dataTables.bootstrap5.js"></script>
+<!-- <script defer type="text/javascript" src="/public/DataTables/Buttons-2.3.4/js/dataTables.buttons.js"></script> -->
+<!-- <script defer type="text/javascript" src="/public/DataTables/Buttons-2.3.4/js/buttons.bootstrap5.js"></script> -->
+<!-- <script defer type="text/javascript" src="/public/DataTables/Buttons-2.3.4/js/buttons.html5.js"></script> -->
+<!-- <script defer type="text/javascript" src="/public/DataTables/Buttons-2.3.4/js/buttons.print.js"></script> -->
+<script defer type="text/javascript" src="/public/DataTables/Responsive-2.4.0/js/dataTables.responsive.js"></script>
+<script defer type="text/javascript" src="/public/DataTables/Responsive-2.4.0/js/responsive.bootstrap5.js"></script>
+<!-- <script src="/public/javascripts/chart.js"></script> -->
+</head>
+<body class="">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light  fixed-top">
+    <div class="container max-width">
+      <a class="navbar-brand" href="/admin">Dashboard</a>
+      <button id="navbarSideCollapse" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <nav class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasTopExample"></nav>
+        
+          <ul class="navbar-nav navbar-expand-lg me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="/admin/form-list">Messages 
+              <% if(locals.count > 0) {%> 
+                <span class="badge bg-danger"><%- locals.count %></span>
+              <%}%>
+            </a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/user-list">Users</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownBlog">
+                <li><a class="dropdown-item" href="/admin/post-list">Posts</a></li>      
+                <li><a class="dropdown-item" href="/admin/post-form">Create New Post</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentation</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownBlog">
+                <li><a class="dropdown-item" href="/admin/doc-list">Docs</a></li>      
+                <li><a class="dropdown-item" href="/admin/doc-form">Create New Doc</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/admin/user/<%- locals.currentUser._id %>/update">Account Info</a></li>
+                <li><a class="dropdown-item" href="/admin/user-form">Create New User</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/admin/user/<%- locals.currentUser._id %>/change-password">Change Password</a></li>
+                <li><a class="dropdown-item" href="/log-out">Log Out</a></li>
+
+              </ul>
+            </li>
+          </ul>
+      </nav> 
+
+    </div>
+    
+  </nav>
+  
+  <main class="p-md-5 pt-5">
+    <%- body %>
+  </main>
+
+  <script defer src="/public/javascripts/datatable.js"></script>
+
+  <script src="/public/javascripts/offcanvas.js"></script>
+  <!-- Script element sourcing TinyMCE -->
+  <script type="application/javascript" src= "/tinymce/tinymce.min.js"></script>
+  <!-- Script element sourcing the TinyMCE configuration -->
+  <script type="application/javascript" src= "/public/javascripts/my-tinymce-config.js"></script>
+
+</body>
+</html>

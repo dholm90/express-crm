@@ -1,0 +1,36 @@
+<div class="container d-grid">
+  <h1 class="mb-5"><u>Blog Posts</u></h1>
+  <h3 class="">Unpublished</h3>
+  <hr>
+  <div class="row mb-5">
+    <% unpublished_posts.forEach(post => { %>
+      <div class="col-12 col-md-6 mb-4">
+        <div class="card bg-light shadow">
+          <div class="card-body">
+            <p><b>Title: </b><%- post.title %></p>
+            <p><b>Created On: </b><%- post.createdAt_formatted %> </p>
+            <a href="<%- post.url %>" class="btn btn-primary">View Post</a>       
+          </div>
+        </div>
+      </div>
+      
+    <% }) %>
+  </div>
+  
+  <h3 class="">Published</h3>
+  <hr>
+  <div class="row">
+    <% published_posts.forEach(post => { %>
+      <div class="col-12 col-md-6 mb-4">
+        <div class="card bg-light shadow">
+          <div class="card-body">
+            <p><b>Title: </b><%- post.title %></p>
+            <p><b>Created On: </b><%- post.createdAt_formatted %> </p>
+            <a href="<%- post.url %>" class="btn btn-primary">View Post</a>       
+          </div>
+        </div>
+      </div>
+      
+    <% }) %>
+  </div>
+</div>

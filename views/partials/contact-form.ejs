@@ -1,0 +1,30 @@
+<div class="container ">
+  <div class="pricing-header p-3 pb-0 mx-auto text-center">
+    <h1 class="display-4 fw-normal">Contact</h1>
+    <p class="fs-5 ">Please enter your name, email, phone number, and any information or questions you might have in the form below.</p>
+    
+  </div>
+  <div class="mx-auto pb-5 ">
+    <form class="p-4 p-md-5 pt-2 pt-md-2 rounded-3 text-dark" action='/contact-form' method="POST">
+      <div class="form-floating mb-3">
+        <input class="form-control" type="text" name="name" id="name-contact" required="true" placeholder="Name">
+        <label class="" for="name-contact">Name:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" type="email" name="email" id="email-contact" required="true" placeholder="example@google.com">
+        <label class="" for="email-contact">Email:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" type="tel" name="phone" id="phone-contact" required="true" placeholder="5195555555">
+        <label class="" for="phone-contact">Phone</label>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea class="form-control" name="message" id="message-contact" cols="30" rows="10" required="true" placeholder="Hello!"></textarea></textarea>
+        <label class="" for="message-contact">Message:</label>
+      </div>
+      <button class="w-100 btn btn-lg btn-warning rounded-pill" type="submit">How can we help you?</button>
+      <hr class="my-3 text-light">
+      <small class="text-light">We look forward to hearing from you and will get back to you as soon as possible. Thank you!</small>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<!-- <div class="container d-grid mb-5"> -->
+  <div class="d-flex gap-3 align-items-center">
+    <h1 class=""><u><%- title %></u></h1>
+    <form class="" action="/dashboard/create-client" method="get">
+      <button class=" btn btn-primary">New Client</button>
+    </form>
+  </div>
+  <hr>
+  <!-- <div class="table-responsive text-nowrap"> -->
+  <table class="table table-striped text-nowrap display-export" style="width:100%">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone #</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>Province</th>
+        <th>Postal</th>
+      </tr>
+    </thead>
+    <tbody class="align-middle">
+      <% client_list.forEach(client => { %>
+        <tr>
+          <td>
+            <a class="" href="<%- client.url %>"><%- client.name %></a>
+          </td>
+          <td><a href="mailto:<%- client.email %>"><%- client.email %></a></td>
+          <td><a href="tel:+<%- client.phone %>"><%= phoneHelper.formatPhoneNumber(client.phone) %></a></td>
+          <td><%- client.street %></td>
+          <td><%- client.city %></td>
+          <td><%- client.province %></td>
+          <td><%- client.postal %></td>
+        </tr>
+      <% }) %> 
+    </tbody>
+  </table>    
+  <!-- </div> -->
+<!-- </div> -->
+
+

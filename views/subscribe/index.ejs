@@ -1,0 +1,114 @@
+<% if(locals.currentUser.role == 'ADMIN') { %>
+  
+<% if(!locals.business.hasTrialed) { %>
+<div id="pricing" class="section-container">
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 fw-normal">Activate Your Free 30 Day Trial</h1>
+    <p class="fs-5">Try Bear Quotes for free for 30 days, no credit card required. Propel your business forward and save time with our contracting business invoicing software, the sky's the limit.</p>
+  </div>
+  <div class="row mb-3 text-center">
+    <div class="col-12 col-lg-6 ">
+      <div class="card mx-auto  bg-dark text-light mb-4 rounded  shadow-sm">
+        <div class="card-header bg-light text-dark py-3">
+          <h2 class="h4 my-0 fw-normal">Standard Package</h2>
+        </div>
+        <div class="card-body border border-dark border-top-0 rounded-bottom">
+          <h1 class="card-title pricing-card-title">$29.99<small class="fw-light">/mo</small></h1>
+          <p>First month free</p>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>Unlimited employee accounts</li>
+            <li>Unlimited clients</li>
+            <li>Unlimited transactional emails</li>
+            <li>Unlimited image storage</li>
+            <li>Unlimited quotes, jobs, and invoices</li>
+            <li>Unlimited credit card transactions</li>
+          </ul>
+          <form action="/stripe/subscription-checkout" method="post">
+            <button class="w-100 btn btn-lg btn-warning rounded-pill">Activate Free Trial!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+     <div class="col-12 col-lg-6 ">
+      <div class="card mx-auto bg-dark text-light mb-4 rounded  shadow-sm">
+        <div class="card-header bg-light text-dark py-3">
+          <h2 class="h4 my-0 fw-normal">Annual Package - <span class="text-danger">Save 20%</span></h2>
+        </div>
+        <div class="card-body border border-dark border-top-0 rounded-bottom">
+          <h1 class="card-title pricing-card-title">$299.99<small class="fw-light">/year</small></h1>
+          <p>First month free</p>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>Unlimited employee accounts</li>
+            <li>Unlimited clients</li>
+            <li>Unlimited transactional emails</li>
+            <li>Unlimited image storage</li>
+            <li>Unlimited quotes, jobs, and invoices</li>
+            <li>Unlimited credit card transactions</li>
+          </ul>
+          <form action="/stripe/subscription-checkout-annual" method="post">
+            <button class="w-100 btn btn-lg btn-warning rounded-pill">Activate Free Trial!</button>
+          </form>
+        </div>
+      </div>
+     </div>
+    </div>
+  </div>
+
+<% } else { %>
+<div id="pricing" class="section-container">
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 fw-normal">Subscribe and get to work!</h1>
+    <p class="fs-5">Get ahead of the curve. At just $29.99 per month, you can run your contracting company with ease. Propel your business forward and save time with our contracting business invoicing software, the sky's the limit.</p>
+  </div>
+  <div class="row mb-3 text-center">
+    <div class="col col-lg-6">
+      <div class="card mx-auto w-75 bg-dark text-light mb-4 rounded  shadow-sm">
+        <div class="card-header bg-light text-dark py-3">
+          <h2 class="h4 my-0 fw-normal">Standard Package</h2>
+        </div>
+        <div class="card-body border border-dark border-top-0 rounded-bottom">
+          <h1 class="card-title pricing-card-title">$29.99<small class="fw-light">/mo</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>Unlimited employee accounts</li>
+            <li>Unlimited clients</li>
+            <li>Unlimited transactional emails</li>
+            <li>Unlimited image storage</li>
+            <li>Unlimited quotes, jobs, and invoices</li>
+            <li>Unlimited credit card transactions</li>
+          </ul>
+          <form action="/stripe/subscription-checkout-no-trial" method="post">
+            <button class="w-100 btn btn-lg btn-warning rounded-pill">Subscribe!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col col-lg-6">
+      <div class="card mx-auto w-75 bg-dark text-light mb-4 rounded  shadow-sm">
+        <div class="card-header bg-light text-dark py-3">
+          <h2 class="h4 my-0 fw-normal">Annual Package - <span class="text-danger">Save 20%</span></h2>
+        </div>
+        <div class="card-body border border-dark border-top-0 rounded-bottom">
+          <h1 class="card-title pricing-card-title">$299.99<small class="fw-light">/year</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>Unlimited employee accounts</li>
+            <li>Unlimited clients</li>
+            <li>Unlimited transactional emails</li>
+            <li>Unlimited image storage</li>
+            <li>Unlimited quotes, jobs, and invoices</li>
+            <li>Unlimited credit card transactions</li>
+          </ul>
+          <form action="/stripe/subscription-checkout-no-trial-annual" method="post">
+            <button class="w-100 btn btn-lg btn-warning rounded-pill">Subscribe!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% } %>
+<% } else { %>
+  <div id="pricing" class="section-container">
+  <h1>Subscription has been cancelled or paused, please inform your employer.</h1>
+  </div>
+<% } %>

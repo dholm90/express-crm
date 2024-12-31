@@ -1,0 +1,56 @@
+<% if(locals.errors) {%> 
+  <div class="alert alert-danger">
+    <ul>
+      <% errors.forEach(err => { %>
+        <li><%- err.msg %> </li>
+      <% }) %> 
+    </ul>
+  </div>
+<%}%>
+<h1 class="text-center"><%- title %>: <%- doc.title %></h1>
+<hr>
+<div class="container mb-5">
+  <div class="card">
+    <div class="card-body border-top border-warning border-5 bg-light text-dark bg-gradient border-1">
+      <form action="" class="" method="post">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="title" name="title" type="text" required="true" placeholder="Title" value='<%= doc ? doc.title : '' %>' />
+          <label for="title">Title:</label>
+        </div>
+        
+        <div class="form-floating mb-3">
+          <textarea class="form-control" id="parent" name="parent" required="true" placeholder="Home"><%- doc.parent %> </textarea>
+          <label for="parent">Parent Page:</label>
+        </div>
+        
+        <textarea name="tinymce_content" id="tinymce_content" required="true"><%- doc.content %></textarea>
+        <div class="mb-3"></div>
+        <div class="form-check mb-3">
+          <label for="isPublished">Publish this article</label>
+          <input class="form-check-input" type="checkbox" name="isPublished" id="isPublished" <%= doc.isPublished ? "checked" : "" %>>
+        </div>
+        
+        <button type="submit" class="btn btn-warning">Save</button>
+        <button id="deleteToggle" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+      </form>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Article</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              This will permanantly delete this documentation article.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <form action="/dashboard/post/<%- doc._id %>/delete" method="post">
+                <button class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

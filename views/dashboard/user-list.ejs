@@ -1,0 +1,50 @@
+<!-- <div class="container d-flex flex-column mb-5"> -->
+  <div class="d-flex gap-3 align-items-center">
+    <h1 class=""><u><%- title %></u></h1>
+    <form class="" action="/dashboard/user-form" method="get">
+      <button class=" btn btn-primary">New Employee</button>
+    </form>
+  </div>
+  <hr>
+  <!-- <div class="table-responsive text-nowrap"> -->
+  <table id="myTable" class="table table-striped text-nowrap display-export" style="width:100%">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone #</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>Province</th>
+        <th>Postal</th>
+        <th>HST/VAT</th>
+        <th>Hourly Rate</th>
+        <th>Role</th>
+      
+      </tr>
+    </thead>
+    <tbody class="align-middle">
+      <% user_list.forEach(user => { %>
+        <tr>
+          <td>
+            <a class="" href="<%- user.url_dashboard %>"><%- user.name %></a>
+          </td>
+          <td><a href="mailto:<%- user.email %>"><%- user.email %></a></td>
+          <td><a href="tel:+<%- user.phone %>"><%= phoneHelper.formatPhoneNumber(user.phone) %></a></td>
+          <td><%- user.street %></td>
+          <td><%- user.city %></td>
+          <td><%- user.province %></td>
+          <td><%- user.postal %></td>
+          <td><%- user.hst %></td>
+          <td><%- user.hourlyRate %></td>
+          <td><%- user.role %></td>
+          
+        </tr>
+      <% }) %> 
+    </tbody>
+  </table>
+  <!-- </div> -->
+
+  
+
+<!-- </div> -->
